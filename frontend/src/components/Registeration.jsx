@@ -1,9 +1,11 @@
 import React from "react";
 import { useFormik } from "formik";
-import { loginSchema } from "./../schemas";
+import { registrationSchema } from "./../schemas";
 import axios from "axios";
 
 const initialValues = {
+    username: "",
+    email: "",
   password: "",
 };
 
@@ -11,7 +13,7 @@ const Registration = () => {
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
       initialValues,
-      validationSchema: loginSchema,
+      validationSchema: registrationSchema,
       onSubmit: async (values, action) => {
         try {
           // Placeholder for login API call
