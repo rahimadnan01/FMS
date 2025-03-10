@@ -1,21 +1,12 @@
 {
-<<<<<<< HEAD
-  "name": "backend",
-=======
+
   "name": "fms",
->>>>>>> 1c1693a (Initial commit)
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-<<<<<<< HEAD
-    "dev": "nodemon -r dotenv/config --experimental-json-modules src/index.js"
-  },
-  "type": "module",
-=======
      "dev": "nodemon -r dotenv/config --experimental-json-modules src/index.js"
   },
->>>>>>> 1c1693a (Initial commit)
   "keywords": [],
   "author": "",
   "license": "ISC",
