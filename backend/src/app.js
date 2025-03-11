@@ -17,10 +17,12 @@ app.set(express.static("public"));
 export { app };
 
 // importing routes
-import authRoute from "./routes/auth.routes.js"
+import adminAuthRoute from "./routes/adminAuth.routes.js"
+import staffAuthRoute from "./routes/staffAuth.routes.js"
 
 // declaring the routes
-app.use("/api/v1/auth", authRoute)
+app.use("/api/v1", adminAuthRoute)
+app.use("/api/v1", staffAuthRoute)
 
 app.all("*", (req, res, next) => {
     next({ status: 404, message: "Page not found" });
