@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
-import { ApiError } from "./ApiError";
+import { ApiError } from "./ApiError.js";
 import { User } from "../models/User.model.js";
-import { wrapAsync } from "./wrapAsync";
+import { wrapAsync } from "./wrapAsync.js";
 
 const generateAccessAndRefreshToken = wrapAsync(async (userId) => {
   try {
