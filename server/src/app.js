@@ -6,20 +6,19 @@ const app = express();
 
 app.use(
   cors({
-    credentials: true,
     origin: process.env.CORS_ORIGIN,
+    credentials: true,
   })
 );
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());
-app.set(express.static("public"));
+app.use(express.static("public"));
 export { app };
 // routs decleration
 import adminAuthRoute from "./routes/authentication/adminAuth.routes.js";
+import { notFoundHandler } from "./middlewares/notFound.middelware.js";
 // routes usage
 app.use("/api/v1", adminAuthRoute);
-app.all("*", (req, res, next) => {
-  next({ status: 500, message: "page not found" });
-});
+app.use(notFoundHandler);
 app.use(errorHandler);
