@@ -3,20 +3,20 @@ import { ApiError } from "./ApiError.js";
 import { User } from "../models/User.model.js";
 import { wrapAsync } from "./wrapAsync.js";
 
-const generateAccessAndRefreshToken = wrapAsync(async (userId) => {
+const generateAccessAndRefreshToken = async (userId) => {
   try {
     const user = await User.findById(userId);
     if (!user) {
       throw new ApiError(404, "User not found of this Id");
     }
-    const accessToken = await user.generateAccessToken();
+    const accessToken = user.generateAccessToken();
     if (!accessToken) {
       throw new ApiError(
         500,
         "Something went wrong while generatig the access Token"
       );
     }
-    const refreshToken = await user.generateRefreshToken();
+    const refreshToken = user.generateRefreshToken();
     if (!refreshToken) {
       throw new ApiError(
         500,
@@ -44,5 +44,5 @@ const generateAccessAndRefreshToken = wrapAsync(async (userId) => {
   } catch (error) {
     throw new ApiError(error.status, error.message);
   }
-});
+};
 export { generateAccessAndRefreshToken };
