@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 import jwt from "jsonwebtoken";
 import { wrapAsync } from "../utils/wrapAsync.js";
 import { ApiError } from "../utils/ApiError.js";
+import { User } from "../models/User.model.js";
 
 const verifyJwt = (role) =>
   wrapAsync(async (req, res, next) => {

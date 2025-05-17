@@ -28,19 +28,22 @@ const registerAdmin = wrapAsync(async (req, res) => {
 
   const admin = await Admin.create({
     user: userCreated._id,
-  }).populate({
-    path: "user",
-    populate: "username email",
   });
 
   if (!admin) {
     throw new ApiError(500, "Somethign went wrong while creating the admin");
   }
-
+  const createdAdmin = await Admin.findById(admin._id).populate({
+    path: "user",
+    populate: "username email",
+  });
+  if (!createdAdmin) {
+    throw new ApiError(500, "Failed to register admin");
+  }
   res.status(200).json(
     new ApiResponse(200, "Admin registered succressfully", {
       userCreated,
-      admin,
+      createdAdmin,
     })
   );
 });
@@ -65,7 +68,9 @@ const loginAdmin = wrapAsync(async (req, res) => {
     throw new ApiError(403, "access denied Not an Admin");
   }
 
-  const { accessToken, refreshToken } = generateAccessAndRefreshToken();
+  const { accessToken, refreshToken } = await generateAccessAndRefreshToken(
+    user._id
+  );
   if (!accessToken || !refreshToken) {
     throw new ApiError(500, "Failed to generate Tokens");
   }

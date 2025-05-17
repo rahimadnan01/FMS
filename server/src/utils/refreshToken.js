@@ -31,7 +31,7 @@ const refreshToken = wrapAsync(async (req, res) => {
   }
 
   let { accessToken, refreshToken: newRefreshToken } =
-    await generateAccessAndRefreshToken();
+    await generateAccessAndRefreshToken(user._id);
 
   if (!accessToken || !newRefreshToken) {
     throw new ApiError(500, "Failed to refresh Tokens");

@@ -6,7 +6,9 @@ import {
   registerAdmin,
 } from "../../controllers/Admin.controller.js";
 import { verifyJwt } from "../../middlewares/auth.middelware.js";
-router.route("/admin/register").post(verifyJwt("admin"), registerAdmin);
+import { refreshToken } from "../../utils/refreshToken.js";
+router.route("/admin/register").post(registerAdmin);
 router.route("/admin/login").post(loginAdmin);
-router.route("/admin/logout").post(logoutAdmin);
+router.route("/admin/logout").post(verifyJwt("admin"), logoutAdmin);
+router.route("/refreshToken").post(refreshToken);
 export default router;
