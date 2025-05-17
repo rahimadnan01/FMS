@@ -1,53 +1,49 @@
-import mongoose from "mongoose";
+import { Staff } from "../models/Staff.model.js";
 import { User } from "../models/User.model.js";
 import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
-import { wrapAsync } from "../utils/wrapAsync.js";
-import { Admin } from "../models/Admin.model.js";
 import { generateAccessAndRefreshToken } from "../utils/Tokens.js";
-const registerAdmin = wrapAsync(async (req, res) => {
+import { wrapAsync } from "../utils/wrapAsync.js";
+import jwt from "jsonwebtoken";
+
+const registerStaff = wrapAsync(async (req, res) => {
   const { username, email, password } = req.body;
   if (!username || !email || !password) {
-    throw new ApiError(400, "All fields are required");
+    throw new ApiError(401, "All fields are required");
   }
   const existedUser = await User.findOne({ email: email });
   if (existedUser) {
-    throw new ApiError(401, "User of this email already exists");
+    throw new ApiError(401, "User already exists of this email");
   }
   const user = await User.create({
     username: username,
     email: email,
     password: password,
-    role: "admin",
+    role: "staff",
   });
-
-  const userCreated = await User.findById(user._id).select("-password");
-  if (!userCreated) {
+  if (!user) {
     throw new ApiError(500, "Something went wrong while creating the user");
   }
-
-  const admin = await Admin.create({
-    user: userCreated._id,
-  });
-
-  if (!admin) {
-    throw new ApiError(500, "Somethign went wrong while creating the admin");
+  const createdUser = await User.findById(user._id).select("-password");
+  if (!createdUser) {
+    throw new ApiError(500, "failed to get created User");
   }
-  const createdAdmin = await Admin.findById(admin._id).populate({
-    path: "user",
-    populate: "username email",
+
+  const staff = await Staff.create({
+    user: user._id,
   });
-  if (!createdAdmin) {
-    throw new ApiError(500, "Failed to register admin");
+  if (!staff) {
+    throw new ApiError(500, "Failed to register te staff");
   }
+
   res.status(200).json(
-    new ApiResponse(200, "Admin registered succressfully", {
-      userCreated,
-      createdAdmin,
+    new ApiResponse(200, "Staff registered successfully", {
+      createdUser,
+      staff,
     })
   );
 });
-const loginAdmin = wrapAsync(async (req, res) => {
+const loginStaff = wrapAsync(async (req, res) => {
   const { email, password } = req.body;
   if ((!email, !password)) {
     throw new ApiError(401, "All fields are required");
@@ -64,8 +60,8 @@ const loginAdmin = wrapAsync(async (req, res) => {
       "Access denied invalid password ,Put correct password"
     );
   }
-  if (user.role !== "admin") {
-    throw new ApiError(403, "access denied Not an Admin");
+  if (user.role !== "staff") {
+    throw new ApiError(403, "access denied Not an Staff");
   }
 
   const { accessToken, refreshToken } = await generateAccessAndRefreshToken(
@@ -89,14 +85,14 @@ const loginAdmin = wrapAsync(async (req, res) => {
     .cookie("accessToken", accessToken, options)
     .cookie("refreshToken", refreshToken, options)
     .json(
-      new ApiResponse(200, "Admin logged in successfully", {
+      new ApiResponse(200, "Staff logged in successfully", {
         loggedInUser,
         accessToken: accessToken,
         refreshToken: refreshToken,
       })
     );
 });
-const logoutAdmin = wrapAsync(async (req, res) => {
+const logoutStaff = wrapAsync(async (req, res) => {
   const user = req.user;
   if (!user) {
     throw new ApiError(404, "User not found");
@@ -128,4 +124,4 @@ const logoutAdmin = wrapAsync(async (req, res) => {
     );
 });
 
-export { registerAdmin, loginAdmin, logoutAdmin };
+export { registerStaff, loginStaff, logoutStaff };
