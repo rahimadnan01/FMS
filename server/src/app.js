@@ -18,9 +18,11 @@ export { app };
 // routs decleration
 import adminAuthRoute from "./routes/authentication/adminAuth.routes.js";
 import staffAuthRoute from "./routes/authentication/staffAuth.routes.js";
+import staffRoute from "./routes/staff.route.js";
 import { notFoundHandler } from "./middlewares/notFound.middelware.js";
 // routes usage
 app.use("/api/v1", adminAuthRoute);
 app.use("/api/v1", staffAuthRoute);
+app.use("/api/v1",staffRoute)
 app.use(notFoundHandler);
 app.use(errorHandler);

@@ -3,8 +3,7 @@ const staffSchema = new mongoose.Schema(
   {
     user: {
       type: mongoose.Schema.Types.ObjectId,
-      user: "User",
-      required: true,
+      ref: "User",
     },
   },
   { timestamps: true }

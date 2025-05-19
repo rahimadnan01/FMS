@@ -123,5 +123,89 @@ const logoutStaff = wrapAsync(async (req, res) => {
       new ApiResponse(200, "User logged out successfully", { loggedOutUser })
     );
 });
+const getAllStaff = wrapAsync(async (req, res) => {
+  const allStaff = await Staff.find({}).populate({
+    path: "user",
+    select: "username email role",
+  });
+  if (!allStaff) {
+    throw new ApiError(500, "Failed to fetch staff");
+  }
+  res
+    .status(200)
+    .json(new ApiResponse(200, "Staff fetched successfully", allStaff));
+});
+const getSingleStaff = wrapAsync(async (req, res) => {
+  let { id } = req.params;
+  if (!id) {
+    throw new ApiError(401, "Staff not found of this id");
+  }
+  const singleStaff = await Staff.findById(id).populate({
+    path: "user",
+    select: "username email role",
+  });
+  if (!singleStaff) {
+    throw new ApiError(500, "Failed to fetch a single Staff");
+  }
+  res
+    .status(200)
+    .json(new ApiResponse(200, "Staff fetched successfully", { singleStaff }));
+});
+const deleteSingleStaff = wrapAsync(async (req, res) => {
+  let { id } = req.params;
+  if (!id) {
+    throw new ApiError(401, "User not found of thid Id");
+  }
 
-export { registerStaff, loginStaff, logoutStaff };
+  const singleStaff = await Staff.findById(id).populate({
+    path: "user",
+    select: "username email role",
+  });
+  if (!singleStaff) {
+    throw new ApiError(400, "No staff found");
+  }
+  const staffEmail = singleStaff.user?.email;
+  if (!staffEmail) {
+    throw new ApiError(500, "failed to fetch email");
+  }
+  const deletedUser = await User.findOneAndDelete({ email: staffEmail });
+  if (!deletedUser) {
+    throw new ApiError(500, "failed to delete User");
+  }
+  const deletedStaff = await Staff.findByIdAndDelete(id, {
+    new: true,
+  });
+  if (!deletedStaff) {
+    throw new ApiError(500, "Failed to delete Staff");
+  }
+  res.status(200).json(
+    new ApiResponse(200, "Staff deleted successfully", {
+      deletedStaff,
+      singleStaff,
+      deletedUser,
+    })
+  );
+});
+const deleteAllStaff = wrapAsync(async (req, res) => {
+  const deletedStaff = await Staff.deleteMany({});
+  if (!deletedStaff) {
+    throw new ApiError(500, "failed to deleted Staff");
+  }
+  const deletedUsers = await User.deleteMany({ role: "staff" });
+  if (!deletedUsers) {
+    throw new ApiError(500, "Failed to delet all users of role staff");
+  }
+  res
+    .status(200)
+    .json(new ApiResponse(200, "staff deleted successfully", { deletedStaff }));
+});
+
+export {
+  registerStaff,
+  loginStaff,
+  logoutStaff,
+  getAllStaff,
+  getSingleStaff,
+  deleteSingleStaff,
+  deleteAllStaff,
+};
