@@ -106,5 +106,97 @@ const updateFlock = wrapAsync(async (req, res) => {
     })
   );
 });
+const deleteOneFlock = wrapAsync(async (req, res) => {
+  const { id } = req.params;
+  if (!id) {
+    throw new ApiError(404, "flock not found of this Id");
+  }
+  const flock = await Flock.findById(id);
+  if (!flock) {
+    throw new ApiError(404, "Flock not found od this Id");
+  }
 
-export { addFlock, updateFlock };
+  const deletedFlock = await Flock.findByIdAndDelete(flock._id, {
+    new: true,
+  });
+
+  if (!deletedFlock) {
+    throw new ApiError(500, "Something went wrong while deleting the flock ");
+  }
+
+  const deletedFeedStock = await FeedStock.findOneAndDelete({
+    flock: flock._id,
+  });
+  if (!deletedFeedStock) {
+    throw new ApiError(
+      500,
+      "Something went wrong while deleting the feed Stock"
+    );
+  }
+
+  res.status(200).json(
+    new ApiResponse(200, "Flock deleted Successfully", {
+      deletedFeedStock,
+      deletedFlock,
+    })
+  );
+});
+const deleteAllFlock = wrapAsync(async (req, res) => {
+  const deletedFlocks = await Flock.deleteMany({});
+  if (!deletedFlocks) {
+    throw new ApiError(500, "Somethig went wrong while deleting the Flocks");
+  }
+  const deletedFeedStocks = await FeedStock.deleteMany({});
+  if (!deletedFeedStocks) {
+    throw new ApiError(
+      500,
+      "Something went wrong while deleting the feed Stock"
+    );
+  }
+  res.status(200).json(
+    new ApiResponse(200, "All flocks deleted successfully", {
+      deletedFlocks,
+      deletedFeedStocks,
+    })
+  );
+});
+const getAllFlocks = wrapAsync(async (req, res) => {
+  const allFlocks = await FeedStock.find({}).populate({
+    path: "flock",
+  });
+  if (!allFlocks) {
+    throw new ApiError(404, "No flocks found");
+  }
+  res
+    .status(200)
+    .json(new ApiResponse(200, "Flocks Founs successfully", allFlocks));
+});
+const getOneFlock = wrapAsync(async (req, res) => {
+  const { id } = req.params;
+  if (!id) {
+    throw new ApiError(401, "Id not found");
+  }
+  const flock = await Flock.findById(id);
+  if (!flock) {
+    throw new ApiError(404, "Flock not found");
+  }
+  const feedStock = await FeedStock.findOne({ flock: flock._id });
+  if (!feedStock) {
+    throw new ApiError(404, "Feed Stock not found for this flock");
+  }
+  res.status(200).json(
+    new ApiResponse(200, "Flock fetched successfully", {
+      flock,
+      feedStock,
+    })
+  );
+});
+
+export {
+  addFlock,
+  updateFlock,
+  deleteOneFlock,
+  deleteAllFlock,
+  getAllFlocks,
+  getOneFlock,
+};
