@@ -83,7 +83,7 @@ const updateFlock = wrapAsync(async (req, res) => {
   if (mortality) flock.mortality = mortality;
   if (totalProduction) flock.totalProduction = totalProduction;
   const updatedFlock = await flock.save();
-  if (updatedFlock) {
+  if (!updatedFlock) {
     throw new ApiError(500, "Failed to update flock");
   }
 
@@ -95,7 +95,7 @@ const updateFlock = wrapAsync(async (req, res) => {
   if (feedConsumed) feedStock.feedConsumed = feedConsumed;
 
   const updatedFeedStock = await feedStock.save();
-  if (updatedFeedStock) {
+  if (!updatedFeedStock) {
     throw new ApiError(500, "Failed to update the feed Stock");
   }
 
