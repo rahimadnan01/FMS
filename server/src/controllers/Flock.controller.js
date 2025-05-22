@@ -4,24 +4,8 @@ import { ApiResponse } from "../utils/ApiResponse.js";
 import { wrapAsync } from "../utils/wrapAsync.js";
 import { FeedStock } from "../models/FeedStock.model.js";
 const addFlock = wrapAsync(async (req, res) => {
-  const {
-    name,
-    breed,
-    totalBirds,
-    mortality,
-    totalProduction,
-    totalFeedStock,
-    feedConsumed,
-  } = req.body;
-  if (
-    !name ||
-    !breed ||
-    !totalBirds ||
-    !mortality ||
-    !totalProduction ||
-    !totalFeedStock ||
-    !feedConsumed
-  ) {
+  const { name, breed, totalBirds, totalFeedStock } = req.body;
+  if (!name || !breed || !totalBirds || !totalFeedStock) {
     throw new ApiError(401, "All fields are required");
   }
   const existedFlock = await Flock.findOne({ name: name });
@@ -33,8 +17,6 @@ const addFlock = wrapAsync(async (req, res) => {
     name: name,
     breed: breed,
     totalBirds: totalBirds,
-    mortality: mortality,
-    totalProduction: totalProduction,
   });
   const createdFlock = await Flock.findById(flock._id);
   if (!createdFlock) {
@@ -44,7 +26,6 @@ const addFlock = wrapAsync(async (req, res) => {
   const feedStock = await FeedStock.create({
     flock: createdFlock._id,
     totalFeedStock: totalFeedStock,
-    feedConsumed: feedConsumed,
   });
 
   const createdFeedStock = await FeedStock.findById(feedStock._id);

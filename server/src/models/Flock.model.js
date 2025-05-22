@@ -38,7 +38,7 @@ const flockSchema = new mongoose.Schema(
 
 flockSchema.pre("save", function (next) {
   this.remainingBirds = this.totalBirds - this.mortality;
-  if (this.totalBirds > 100) {
+  if (this.totalBirds > 0) {
     this.percentProduction = (this.totalProduction / this.totalBirds) * 100;
   } else {
     this.percentProduction = 0;
