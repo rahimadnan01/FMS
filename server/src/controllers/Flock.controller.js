@@ -94,7 +94,7 @@ const deleteOneFlock = wrapAsync(async (req, res) => {
   }
   const flock = await Flock.findById(id);
   if (!flock) {
-    throw new ApiError(404, "Flock not found od this Id");
+    throw new ApiError(404, "Flock not found of this Id");
   }
 
   const deletedFlock = await Flock.findByIdAndDelete(flock._id, {
