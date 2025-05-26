@@ -3,6 +3,7 @@ import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { wrapAsync } from "../utils/wrapAsync.js";
 import { FeedStock } from "../models/FeedStock.model.js";
+import { DailyReport } from "../models/DailyReport.model.js";
 const addFlock = wrapAsync(async (req, res) => {
   const { name, breed, totalBirds, totalFeedStock } = req.body;
   if (!name || !breed || !totalBirds || !totalFeedStock) {
@@ -115,10 +116,17 @@ const deleteOneFlock = wrapAsync(async (req, res) => {
     );
   }
 
+  const deletedDailyReport = await DailyReport.deleteMany({
+    flock: flock._id,
+  });
+  if (!deleteddDailyReport) {
+    throw new ApiError(401, "No daily reports found to delete");
+  }
   res.status(200).json(
     new ApiResponse(200, "Flock deleted Successfully", {
       deletedFeedStock,
       deletedFlock,
+      deletedDailyReport,
     })
   );
 });
@@ -134,10 +142,15 @@ const deleteAllFlock = wrapAsync(async (req, res) => {
       "Something went wrong while deleting the feed Stock"
     );
   }
+  const deletedDailyReport = await DailyReport.deleteMany({});
+  if (!deletedDailyReport) {
+    throw new ApiError(500, "Falied to delete all daily report of Flock");
+  }
   res.status(200).json(
     new ApiResponse(200, "All flocks deleted successfully", {
       deletedFlocks,
       deletedFeedStocks,
+      deletedDailyReport,
     })
   );
 });
@@ -148,6 +161,7 @@ const getAllFlocks = wrapAsync(async (req, res) => {
   if (!allFlocks) {
     throw new ApiError(404, "No flocks found");
   }
+
   res
     .status(200)
     .json(new ApiResponse(200, "Flocks Founs successfully", allFlocks));
@@ -165,10 +179,16 @@ const getOneFlock = wrapAsync(async (req, res) => {
   if (!feedStock) {
     throw new ApiError(404, "Feed Stock not found for this flock");
   }
+
+  const dailyReports = await DailyReport.find({ flock: flock._id });
+  if (!dailyReports) {
+    throw new ApiError(404, "Reports not found for this flock");
+  }
   res.status(200).json(
     new ApiResponse(200, "Flock fetched successfully", {
       flock,
       feedStock,
+      dailyReports,
     })
   );
 });
