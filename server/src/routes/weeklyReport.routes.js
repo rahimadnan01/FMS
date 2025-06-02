@@ -1,13 +1,21 @@
 import Router from "express";
 import {
   addWeeklyReport,
+  deleteAllWeeklyReports,
   deleteWeeklyReport,
+  getAllWeeklyReports,
+  getSingleWeeklyReport,
 } from "../controllers/WeeklyReport.controller.js";
 const router = Router();
-// TODO write routes for deleting all reports and for gettign single and multiple reports
-router.route("/flocks/:flockId/weeklyReport").post(addWeeklyReport);
+
+router
+  .route("/flocks/:flockId/weeklyReport")
+  .post(addWeeklyReport)
+  .get(getAllWeeklyReports)
+  .delete(deleteAllWeeklyReports);
 router
   .route("/flocks/:flockId/weeklyReport/:weeklyReportId")
-  .delete(deleteWeeklyReport);
+  .delete(deleteWeeklyReport)
+  .get(getSingleWeeklyReport);
 
 export default router;

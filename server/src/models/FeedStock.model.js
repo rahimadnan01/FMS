@@ -9,7 +9,6 @@ const feedStockSchema = new mongoose.Schema(
     },
     totalFeedStock: {
       type: Number,
-      default: 0,
     },
     feedConsumed: {
       type: Number,

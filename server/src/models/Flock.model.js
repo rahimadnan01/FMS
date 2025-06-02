@@ -16,14 +16,12 @@ const flockSchema = new mongoose.Schema(
     },
     mortality: {
       type: Number,
-      default: 0,
     },
     remainingBirds: {
       type: Number,
     },
     totalProduction: {
       type: Number,
-      default: 0,
     },
     percentProduction: {
       type: Number,

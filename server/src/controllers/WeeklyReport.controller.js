@@ -107,7 +107,6 @@ const deleteWeeklyReport = wrapAsync(async (req, res) => {
     );
 });
 
-//TODO test this API ROUTE
 const deleteAllWeeklyReports = wrapAsync(async (req, res) => {
   const { flockId } = req.params;
   if (!flockId) {
@@ -134,7 +133,6 @@ const deleteAllWeeklyReports = wrapAsync(async (req, res) => {
       )
     );
 });
-// TODO test this ApiRoute
 const getSingleWeeklyReport = wrapAsync(async (req, res) => {
   const { flockId, weeklyReportId } = req.params;
   if (!flockId || !weeklyReportId) {
@@ -148,7 +146,7 @@ const getSingleWeeklyReport = wrapAsync(async (req, res) => {
     _id: weeklyReportId,
     flock: flock._id,
   });
-  if (weeklyReport) {
+  if (!weeklyReport) {
     throw new ApiError(404, "Weekly Report not found");
   }
   res
@@ -157,5 +155,25 @@ const getSingleWeeklyReport = wrapAsync(async (req, res) => {
       new ApiResponse(200, "Weekly Report Shoen successfully", weeklyReport)
     );
 });
-// TODO write Api rouet for getting All reports 
-export { addWeeklyReport, deleteWeeklyReport, deleteAllWeeklyReports };
+const getAllWeeklyReports = wrapAsync(async (req, res) => {
+  let allWeeklyReports = await WeeklyReport.find({});
+  if (!allWeeklyReports) {
+    throw new ApiError(404, "No Weekly Reports found");
+  }
+  res
+    .status(200)
+    .json(
+      new ApiResponse(
+        200,
+        "All weekly reports found successfully",
+        allWeeklyReports
+      )
+    );
+});
+export {
+  addWeeklyReport,
+  deleteWeeklyReport,
+  deleteAllWeeklyReports,
+  getSingleWeeklyReport,
+  getAllWeeklyReports,
+};
