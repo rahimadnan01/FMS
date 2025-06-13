@@ -5,17 +5,27 @@ import "./assets/styles/index.css";
 import RegisterPage from "./pages/RegisterPage";
 import LoginPage from "./pages/LoginPage";
 import HomePage from "./pages/HomePage";
-import { HashRouter, Routes, Route } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
+const router = createBrowserRouter([
+  {
+    path: "/FMS/Login",
+    element: <LoginPage />,
+  },
+  {
+    path: "/FMS/register",
+    element: <RegisterPage />,
+  },
+  {
+    path: "/FMS",
+    element: <HomePage />,
+  },
+]);
 function App() {
   return (
-    <HashRouter>
-      <Routes>
-        <Route path="/FMS/Login" element={<LoginPage />} />
-        <Route path="/FMS/register" element={<RegisterPage />} />
-        <Route path="/FMS" element={<HomePage />} />
-      </Routes>
-    </HashRouter>
+    <>
+      <RouterProvider router={router} />
+    </>
   );
 }
 
