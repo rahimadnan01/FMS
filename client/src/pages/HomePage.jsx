@@ -1,10 +1,7 @@
-import { NavLink } from "react-router-dom";
 function HomePage() {
   return (
     <>
-      <NavLink to={"/FMS/login"}>
-        <h1>Login page</h1>
-      </NavLink>
+      <h1>Hello I am Home Page</h1>
     </>
   );
 }
