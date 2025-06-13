@@ -32,3 +32,18 @@
   color: red;
   font-weight: 300;
 }
+
+.login-link {
+  color: #64748b; /* slate-500 */
+  text-decoration: underline;
+  list-style: none;
+  margin-bottom: 2rem; /* mb-8 = 32px */
+  transition: all 0.1s;
+
+  cursor: default; /* fallback */
+}
+
+.login-link:hover {
+  color: #1e293b; /* slate-800 */
+  cursor: pointer;
+}

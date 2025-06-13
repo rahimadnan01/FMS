@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form";
+import { NavLink, useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
 import "./RegisterForm.css";
 import TextField from "@mui/material/TextField";
@@ -12,6 +13,7 @@ function RegisterForm({ userRole }) {
     watch,
     formState: { errors, isSubmitting },
   } = useForm();
+  const navigate = useNavigate();
 
   const onSubmit = async (data) => {
     try {
@@ -25,9 +27,12 @@ function RegisterForm({ userRole }) {
 
       if (response.status >= 200 && response.status <= 300) {
         console.log(`${userRole} registered successfully`, response.data);
+        alert(`${userRole} registered successfully`);
+        navigate("/FMS/register");
         reset();
       }
     } catch (error) {
+      alert(`Failed to log in ${userRole}`);
       console.log("failed to register User");
     }
   };
@@ -81,6 +86,11 @@ function RegisterForm({ userRole }) {
             {errors.password && (
               <span className="error-text">{errors.password.message}</span>
             )}
+          </div>
+          <div className="register-link">
+            <li className="login-link">
+              <NavLink to="/FMS/login">Have already registered,Login?</NavLink>
+            </li>
           </div>
           <div>
             <Button variant="contained" disabled={isSubmitting} type="submit">

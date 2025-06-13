@@ -1,17 +1,23 @@
 import { createContext, useContext, useState, useEffect } from "react";
 const AuthContext = createContext();
-export const  AuthProvider = ({ children }) => {
+export const AuthProvider = ({ children }) => {
   const [isLogin, setIsLogin] = useState(() => {
-    localStorage.getItem("isLogin") === "true";
+    return localStorage.getItem("isLogin") === "true";
   });
 
   const [user, setUser] = useState(() => {
-    return JSON.parse(localStorage.getItem("user") || null);
+    const storedUser = localStorage.getItem("user");
+    try {
+      return storedUser ? JSON.parse(storedUser) : null;
+    } catch (error) {
+      console.log("failed to parse user form local storage");
+      return null;
+    }
   });
 
   useEffect(() => {
-    localStorage.setItem("isLogin", isLogin);
-    localStorage.setItem("user", user);
+    localStorage.setItem("isLogin", isLogin.toString());
+    localStorage.setItem("user", JSON.stringify(user));
   }, [user, isLogin]);
 
   const login = (userData) => {
@@ -31,6 +37,6 @@ export const  AuthProvider = ({ children }) => {
       {children}
     </AuthContext.Provider>
   );
-}
+};
 
 export const useAuth = () => useContext(AuthContext);

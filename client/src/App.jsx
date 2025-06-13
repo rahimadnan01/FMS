@@ -1,13 +1,30 @@
 import { useState } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
-import RegisterForm from "./components/Auth/RegisterForm";
-import RegisterPage from "./pages/RegisterPage";
 import "./assets/styles/index.css";
+import RegisterPage from "./pages/RegisterPage";
+import LoginPage from "./pages/LoginPage";
+import HomePage from "./pages/HomePage";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+
+const router = createBrowserRouter([
+  {
+    path: "/FMS/Login",
+    element: <LoginPage />,
+  },
+  {
+    path: "/FMS/register",
+    element: <RegisterPage />,
+  },
+  {
+    path: "/FMS",
+    element: <HomePage />,
+  },
+]);
 function App() {
   return (
     <>
-      <RegisterPage />
+      <RouterProvider router={router} />
     </>
   );
 }
