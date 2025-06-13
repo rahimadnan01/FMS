@@ -28,3 +28,14 @@
 .toggle-btn {
   margin: 10px 0;
 }
+
+@media (max-width: 575.98px) {
+  .inner-main-div-register {
+    width: 80vw;
+    min-height: 70vh;
+  }
+
+  .register-form-div {
+    height: 100%;
+  }
+}

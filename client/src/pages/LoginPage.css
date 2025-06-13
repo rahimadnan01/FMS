@@ -26,3 +26,14 @@
 .toggle-btn {
   margin: 10px 0;
 }
+
+@media (max-width: 575.98px) {
+  .inner-main-div-login {
+    height: 80vh;
+    width: 80vw;
+  }
+
+  .Login-form-div {
+    height: 100%;
+  }
+}
