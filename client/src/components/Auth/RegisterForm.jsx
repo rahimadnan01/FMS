@@ -1,4 +1,6 @@
 import { useForm } from "react-hook-form";
+import { useState } from "react";
+
 import { NavLink, useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
 import "./RegisterForm.css";
@@ -14,11 +16,12 @@ function RegisterForm({ userRole }) {
     formState: { errors, isSubmitting },
   } = useForm();
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const onSubmit = async (data) => {
     try {
-      //? Console.log for testing remove it later
-      console.log(userRole);
+      setLoading(true);
       const response = await axios.post(
         `https://fms-1-drlz.onrender.com/api/v1/${userRole}/register`,
         data,
@@ -27,16 +30,30 @@ function RegisterForm({ userRole }) {
 
       if (response.status >= 200 && response.status <= 300) {
         console.log(`${userRole} registered successfully`, response.data);
-        alert(`${userRole} registered successfully`);
-        navigate("/FMS/register");
+        navigate("/FMS/login");
         reset();
       }
     } catch (error) {
-      alert(`Failed to log in ${userRole}`);
+      setError(error.message || "Failed to login User");
       console.log("failed to register User");
+    } finally {
+      setLoading(false);
     }
   };
-
+  if (loading)
+    return (
+      <div className="loader-overlay">
+        <div className="diamond-loader">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    );
+  if (error)
+    return (
+      <ErrorMessage message={error} onRetry={() => window.location.reload()} />
+    );
   return (
     <>
       <div className="main-form-div">
