@@ -1,0 +1,42 @@
+.diamond-loader {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.diamond-loader span {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  background-color: #007bff;
+  border-radius: 50%;
+  animation: pulse 1.2s ease-in-out infinite;
+}
+
+.diamond-loader span:nth-child(1) {
+  top: 0;
+  animation-delay: 0s;
+}
+.diamond-loader span:nth-child(2) {
+  left: 0;
+  animation-delay: 0.2s;
+}
+.diamond-loader span:nth-child(3) {
+  right: 0;
+  animation-delay: 0.4s;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1) translate(0, 0);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.4) translate(0, 0);
+    opacity: 0.6;
+  }
+}
