@@ -1,7 +1,9 @@
 import { navLogo } from "../assets/images/images";
 import { NavLink } from "react-router-dom";
 import "../layouts/Navbar.css";
+import { useAuth } from "../context/AuthProvider";
 function Navbar() {
+  const { isLogin } = useAuth();
   return (
     <div className="main-nav">
       <div className="logo">
@@ -26,9 +28,15 @@ function Navbar() {
         </ul>
       </div>
       <div className="profile">
-        <NavLink to={"/FMS/login"}>
-          <button>Login</button>
-        </NavLink>
+        {isLogin ? (
+          <div>
+            <button>logout</button>
+          </div>
+        ) : (
+          <NavLink to={"/FMS/login"}>
+            <button>Login</button>
+          </NavLink>
+        )}
       </div>
     </div>
   );

@@ -1,12 +1,18 @@
 import { useAuth } from "../../context/AuthProvider.jsx";
 import { useForm } from "react-hook-form";
 import { useNavigate, NavLink } from "react-router-dom";
+import LoadingSpinner from "../UI/LoadingSpinner.jsx";
+import ErrorMessage from "../UI/ErrorMessage.jsx";
 import Button from "@mui/material/Button";
 import "./LoginForm.css";
 import TextField from "@mui/material/TextField";
 import axios from "axios";
+import { useState } from "react";
 function LoginForm({ userRole }) {
   const { login } = useAuth();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
   const {
     register,
     handleSubmit,
@@ -14,8 +20,10 @@ function LoginForm({ userRole }) {
     watch,
     formState: { errors, isSubmitting },
   } = useForm();
+
   const navigate = useNavigate();
   const onSubmit = async (data) => {
+    setLoading(true);
     try {
       const response = await axios.post(
         `https://fms-1-drlz.onrender.com/api/v1/${userRole}/login`,
@@ -28,15 +36,31 @@ function LoginForm({ userRole }) {
           response.data.data.loggedInUser
         );
         login(response.data.data.loggedInUser);
-        alert(`${userRole} logged in successfully`);
         navigate("/FMS");
         reset();
       }
     } catch (error) {
-      console.log(`Failed to login user`);
-      alert(`Failed to log in ${userRole}`);
+      setError(error.message || "Failed to login User");
+      console.log(`Failed to login user`, error.message);
+    } finally {
+      setLoading(false);
     }
   };
+
+  if (loading)
+    return (
+      <div className="loader-overlay">
+        <div className="diamond-loader">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    );
+  if (error)
+    return (
+      <ErrorMessage message={error} onRetry={() => window.location.reload()} />
+    );
   return (
     <>
       <div className="main-form-div">
