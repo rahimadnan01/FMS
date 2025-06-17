@@ -7,6 +7,7 @@ import {
   faChartLine,
   faBox,
   faWarehouse,
+  faSadTear
 } from "@fortawesome/free-solid-svg-icons";
 library.add(
   faHouse,
@@ -15,5 +16,6 @@ library.add(
   faSkullCrossbones,
   faChartLine,
   faBox,
-  faWarehouse
+  faWarehouse,
+  faSadTear
 );

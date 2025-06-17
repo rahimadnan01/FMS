@@ -37,7 +37,9 @@ function Navbar() {
       <div className="links">
         <ul>
           <li>
-            <NavLink className={"nav-link"}>Flocks</NavLink>
+            <NavLink to={"/FMS/flocks"} className={"nav-link"}>
+              Flocks
+            </NavLink>
           </li>
           <li>
             <NavLink className={"nav-link"}>Staff</NavLink>

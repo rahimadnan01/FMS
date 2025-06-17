@@ -6,7 +6,10 @@ import "./assets/styles/index.css";
 import RegisterPage from "./pages/RegisterPage";
 import LoginPage from "./pages/LoginPage";
 import HomePage from "./pages/HomePage";
+import FlocksPage from "./pages/FlocksPage";
+import UpdateFlockPage from "./pages/UpdateFlockPage"
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import ViewFlockPage from "./pages/ViewFlockPage";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +23,18 @@ const router = createBrowserRouter([
   {
     path: "/FMS",
     element: <HomePage />,
+  },
+  {
+    path: "/FMS/flocks",
+    element: <FlocksPage />,
+  },
+  {
+    path: "/FMS/flocks/:id",
+    element: <ViewFlockPage />,
+  },
+  {
+    path: "/FMS/flocks/:id/updateFlock",
+    element:<UpdateFlockPage/>
   },
 ]);
 function App() {

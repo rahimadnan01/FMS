@@ -1,0 +1,32 @@
+.flocks-main {
+  width: 100vw;
+  height: 100vh;
+  overflow-x: hidden;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.flocks-main-h1 {
+  padding: 20px 30px;
+  font-size: 3rem;
+}
+
+.flocks-col-container {
+  width: 100%;
+  height: 80%;
+  padding: 3rem 3rem;
+}
+
+.flock-col {
+  width: 90%;
+  height: 20%;
+  background-color: rgb(199, 210, 221);
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+
+  align-items: center;
+  border: 2px solid grey;
+  border-radius: 5px;
+}
