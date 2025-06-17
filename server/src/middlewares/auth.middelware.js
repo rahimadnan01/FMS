@@ -17,12 +17,11 @@ const verifyJwt = (role) =>
       if (!decodedToken._id) {
         throw new ApiError(
           500,
-          "Somethign went wrong while Decoding the tokens"
+          "Something went wrong while Decoding the tokens"
         );
       }
 
-      const user = await User.findById(decodedToken._id).select(" -passowrd");
-
+      const user = await User.findById(decodedToken._id).select(" -password");
       if (!user) {
         throw new ApiError(500, "Failed to find the User");
       }

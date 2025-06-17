@@ -2,8 +2,31 @@ import { navLogo } from "../assets/images/images";
 import { NavLink } from "react-router-dom";
 import "../layouts/Navbar.css";
 import { useAuth } from "../context/AuthProvider";
+import axios from "axios";
+import { useEffect, useState } from "react";
 function Navbar() {
-  const { isLogin } = useAuth();
+  const { isLogin, logout, user } = useAuth();
+  let [role, setRole] = useState("");
+  useEffect(() => {
+    if (user && user.role == "admin") setRole("admin");
+    else if (user && user.role == "staff") setRole("staff");
+  }, [user]);
+  const handleLogout = async () => {
+    try {
+      console.log(role);
+      const response = await axios.post(
+        `https://fms-1-drlz.onrender.com/api/v1/${role}/logout`,
+        {},
+        {
+          withCredentials: true,
+        }
+      );
+      logout();
+      console.log("User logout successfully", response.data.data.loggedOutUser);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
   return (
     <div className="main-nav">
       <div className="logo">
@@ -30,7 +53,7 @@ function Navbar() {
       <div className="profile">
         {isLogin ? (
           <div>
-            <button>logout</button>
+            <button onClick={handleLogout}>logout</button>
           </div>
         ) : (
           <NavLink to={"/FMS/login"}>

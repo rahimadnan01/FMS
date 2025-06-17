@@ -94,6 +94,7 @@ const loginStaff = wrapAsync(async (req, res) => {
 });
 const logoutStaff = wrapAsync(async (req, res) => {
   const user = req.user;
+  console.log(user);
   if (!user) {
     throw new ApiError(404, "User not found");
   }
