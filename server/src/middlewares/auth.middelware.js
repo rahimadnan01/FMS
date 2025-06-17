@@ -11,7 +11,7 @@ const verifyJwt = (role) =>
         req.cookies.accessToken ||
         req.header("Authorization")?.replace("Bearer", "");
       if (!tokens) {
-        throw new ApiError(403, "User is unauthorized");
+        throw new ApiError(401, "User is unauthorized");
       }
       const decodedToken = jwt.verify(tokens, process.env.ACCESS_TOKEN_KEY);
       if (!decodedToken._id) {

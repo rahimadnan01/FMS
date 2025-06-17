@@ -82,7 +82,8 @@ const loginAdmin = wrapAsync(async (req, res) => {
   }
   const options = {
     httpOnly: true,
-    secure: true,
+    secure: "production",
+    sameSite: "None",
   };
   res
     .status(200)
