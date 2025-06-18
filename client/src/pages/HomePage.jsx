@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import LoadingSpinner from "../components/UI/LoadingSpinner";
 import ErrorMessage from "../components/UI/ErrorMessage";
-import Navbar from "../layouts/navbar";
+import Navbar from "../layouts/Navbar.jsx";
 import useFetch from "../hooks/useFetch";
 import "../pages/HomePage.css";
 import { useEffect, useState } from "react";

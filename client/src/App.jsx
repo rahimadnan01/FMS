@@ -7,9 +7,12 @@ import RegisterPage from "./pages/RegisterPage";
 import LoginPage from "./pages/LoginPage";
 import HomePage from "./pages/HomePage";
 import FlocksPage from "./pages/FlocksPage";
-import UpdateFlockPage from "./pages/UpdateFlockPage"
+import UpdateFlockPage from "./pages/UpdateFlockPage";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ViewFlockPage from "./pages/ViewFlockPage";
+import DailyReportsPage from "./pages/DailyReportsPage";
+import MonthlyReports from "./pages/MonthlyReports";
+import WeeklyReports from "./pages/WeeklyReports";
 
 const router = createBrowserRouter([
   {
@@ -34,7 +37,19 @@ const router = createBrowserRouter([
   },
   {
     path: "/FMS/flocks/:id/updateFlock",
-    element:<UpdateFlockPage/>
+    element: <UpdateFlockPage />,
+  },
+  {
+    path: "/FMS/flocks/:id/dailyReports",
+    element: <DailyReportsPage />,
+  },
+  {
+    path: "/FMS/flocks/:id/monthlyReports",
+    element: <MonthlyReports />,
+  },
+  {
+    path: "/FMS/flocks/:id/weeklyReports",
+    element: <WeeklyReports />,
   },
 ]);
 function App() {

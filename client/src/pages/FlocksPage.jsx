@@ -1,4 +1,4 @@
-import Navbar from "../layouts/navbar";
+import Navbar from "../layouts/Navbar";
 import Button from "@mui/material/Button";
 import useFetch from "../hooks/useFetch";
 import LoadingSpinner from "../components/UI/LoadingSpinner";
@@ -33,6 +33,19 @@ function FlocksPage() {
       console.log("Failed to delete Flock", error.message);
     }
   };
+
+  const handleDeleteAllFlock = async () => {
+    try {
+      const response = await axios.delete(
+        `https://fms-1-drlz.onrender.com/api/v1/flocks`
+      );
+      console.log(response.data.data);
+      window.location.reload();
+    } catch (error) {
+      console.log("Failed to delete Flock", error.message);
+    }
+  };
+
   if (loading)
     return (
       <div className="loader-overlay">
@@ -88,16 +101,25 @@ function FlocksPage() {
                   </Button>
                 </div>
                 <div className="flock-col-view">
-                  <Button
-                    variant="contained"
-                    onClick={() => handleUpdateFlock(flock.flock._id)}
-                  >
+                  <Button variant="contained" onClick={handleDeleteFlock}>
                     Update Flock
                   </Button>
                 </div>
               </div>
             ))
           )}
+        </div>
+        <div className="delete-all">
+          <Button
+            variant="contained"
+            color="error"
+            style={{
+              display: data.length == 0 ? "none" : "block",
+            }}
+            onClick={handleDeleteAllFlock}
+          >
+            Delete All flocks
+          </Button>
         </div>
       </div>
     </>

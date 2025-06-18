@@ -13,13 +13,12 @@
 }
 
 .flocks-col-container {
-  width: 100%;
-  height: 80%;
+  width: 80%;
   padding: 3rem 3rem;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
+  justify-content: start;
+  align-items: center;
   gap: 1rem;
 }
 
@@ -34,4 +33,8 @@
   align-items: center;
   border: 2px solid grey;
   border-radius: 5px;
+}
+
+.delete-all {
+  padding: 2rem 5rem;
 }
