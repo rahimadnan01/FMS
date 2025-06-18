@@ -19,7 +19,7 @@ const dailyReportSchema = new mongoose.Schema(
     },
     eggsCollected: {
       type: Number,
-      defautl: 0,
+      default: 0,
     },
   },
   { timestamps: true }

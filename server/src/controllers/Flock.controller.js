@@ -119,7 +119,7 @@ const deleteOneFlock = wrapAsync(async (req, res) => {
   const deletedDailyReport = await DailyReport.deleteMany({
     flock: flock._id,
   });
-  if (!deleteddDailyReport) {
+  if (!deletedDailyReport) {
     throw new ApiError(401, "No daily reports found to delete");
   }
   res.status(200).json(

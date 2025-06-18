@@ -14,10 +14,10 @@ export function calculateStats(flocks) {
     (acc, flock) => {
       acc.totalFlocks += 1;
       acc.totalProduction += flock.flock.percentProduction || 0;
-      acc.totalBirds += flock.flock.totalBirds;
-      acc.totalFeed += flock.totalFeedStock;
-      acc.remainingFeed += flock.remainingFeed;
-      acc.totalMortality += flock.flock.mortality;
+      acc.totalBirds += flock.flock.totalBirds || 0;
+      acc.totalFeed += flock.totalFeedStock || 0;
+      acc.remainingFeed += flock.remainingFeed || 0;
+      acc.totalMortality += flock.flock.mortality || 0;
       return acc;
     },
     {
