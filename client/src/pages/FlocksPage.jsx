@@ -101,7 +101,10 @@ function FlocksPage() {
                   </Button>
                 </div>
                 <div className="flock-col-view">
-                  <Button variant="contained" onClick={handleDeleteFlock}>
+                  <Button
+                    variant="contained"
+                    onClick={() => handleUpdateFlock(flock.flock._id)}
+                  >
                     Update Flock
                   </Button>
                 </div>
