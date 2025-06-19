@@ -7,6 +7,7 @@ export function calculateStats(flocks) {
       totalEggs: 0,
       totalFeed: 0,
       remainingFeed: 0,
+      totalFeedConsumed: 0,
       totalBirds: 0,
     };
   }
@@ -18,6 +19,7 @@ export function calculateStats(flocks) {
       acc.totalFeed += flock.totalFeedStock || 0;
       acc.remainingFeed += flock.remainingFeed || 0;
       acc.totalMortality += flock.flock.mortality || 0;
+      acc.totalFeedConsumed += flock.feedConsumed || 0;
       return acc;
     },
     {
@@ -26,6 +28,7 @@ export function calculateStats(flocks) {
       totalMortality: 0,
       totalProduction: 0,
       totalFeed: 0,
+      totalFeedConsumed: 0,
       remainingFeed: 0,
     }
   );

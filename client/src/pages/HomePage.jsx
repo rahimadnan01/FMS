@@ -16,6 +16,7 @@ function HomePage() {
     totalFeed: 0,
     remainingFeed: 0,
     totalBirds: 0,
+    totalFeedConsumed: 0,
   });
   let { data, loading, error } = useFetch(
     `https://fms-1-drlz.onrender.com/api/v1/flocks`
@@ -74,7 +75,7 @@ function HomePage() {
           <DataBox
             iconName="warehouse"
             label="Remaining Feed"
-            value={stats.totalFeed - stats.remainingFeed}
+            value={stats.totalFeed - stats.totalFeedConsumed}
           />
         </div>
       </div>
