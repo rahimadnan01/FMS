@@ -11,7 +11,7 @@ const addFlock = wrapAsync(async (req, res) => {
   }
   const existedFlock = await Flock.findOne({ name: name });
   if (existedFlock) {
-    throw new ApiError(401, "flock alredy existed");
+    throw new ApiError(401, "flock already existed");
   }
 
   const flock = await Flock.create({
@@ -133,7 +133,7 @@ const deleteOneFlock = wrapAsync(async (req, res) => {
 const deleteAllFlock = wrapAsync(async (req, res) => {
   const deletedFlocks = await Flock.deleteMany({});
   if (!deletedFlocks) {
-    throw new ApiError(500, "Somethig went wrong while deleting the Flocks");
+    throw new ApiError(500, "Something went wrong while deleting the Flocks");
   }
   const deletedFeedStocks = await FeedStock.deleteMany({});
   if (!deletedFeedStocks) {
@@ -144,7 +144,7 @@ const deleteAllFlock = wrapAsync(async (req, res) => {
   }
   const deletedDailyReport = await DailyReport.deleteMany({});
   if (!deletedDailyReport) {
-    throw new ApiError(500, "Falied to delete all daily report of Flock");
+    throw new ApiError(500, "Failed to delete all daily report of Flock");
   }
   res.status(200).json(
     new ApiResponse(200, "All flocks deleted successfully", {
@@ -164,7 +164,7 @@ const getAllFlocks = wrapAsync(async (req, res) => {
 
   res
     .status(200)
-    .json(new ApiResponse(200, "Flocks Founs successfully", allFlocks));
+    .json(new ApiResponse(200, "Flocks Found successfully", allFlocks));
 });
 const getOneFlock = wrapAsync(async (req, res) => {
   const { id } = req.params;
