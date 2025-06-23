@@ -73,7 +73,7 @@ function FlocksPage() {
               title="No Flocks Available"
               subtitle="You haven’t added any flocks yet. Start by creating one."
               buttonText="Add Flock"
-              buttonLink="/FMS/add-flock"
+              buttonLink="/FMS/flocks/addFlock"
               icon="sad-tear"
             />
           ) : (

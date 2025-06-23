@@ -75,7 +75,7 @@ function HomePage() {
           <DataBox
             iconName="warehouse"
             label="Remaining Feed"
-            value={stats.totalFeed - stats.totalFeedConsumed}
+            value={stats.remainingFeed}
           />
         </div>
       </div>

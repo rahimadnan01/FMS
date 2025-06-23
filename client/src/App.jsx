@@ -14,7 +14,9 @@ import DailyReportsPage from "./pages/DailyReportsPage";
 import MonthlyReports from "./pages/MonthlyReports";
 import WeeklyReports from "./pages/WeeklyReports";
 import AddFlockPage from "./pages/AddFlock";
-
+import ViewDailyReport from "./pages/ViewDailyReport";
+import UpdateDailyReport from "./pages/UpdateDailyReport";
+import AddDailyReport from "./pages/AddDailyReport";
 const router = createBrowserRouter([
   {
     path: "/FMS/Login",
@@ -55,6 +57,18 @@ const router = createBrowserRouter([
   {
     path: "/FMS/flocks/addFlock",
     element: <AddFlockPage />,
+  },
+  {
+    path: "/FMS/flocks/:id/dailyReports/:dailyReportId",
+    element: <ViewDailyReport />,
+  },
+  {
+    path: "/FMS/flocks/:id/dailyReports/:dailyReportId/update",
+    element: <UpdateDailyReport />,
+  },
+  {
+    path: "/FMS/flocks/:id/dailyReports/add",
+    element: <AddDailyReport />,
   },
 ]);
 function App() {

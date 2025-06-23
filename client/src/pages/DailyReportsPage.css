@@ -1,0 +1,44 @@
+.daily-reports-main {
+  width: 100vw;
+  height: 100vh;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.daily-reports-col-main {
+  width: 80%;
+  height: 100%;
+  padding: 2rem 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.daily-report-col {
+  width: 100%;
+  height: 30%;
+  background-color: #c7d2dd;
+  border-radius: 5px;
+  border: 2px solid grey;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.page-end-btns {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+  padding: 3rem 0;
+}
+
+
