@@ -36,7 +36,7 @@ function UpdateFlockPage() {
         reset();
       }
     } catch (error) {
-      setUpdateError(error.message || "Failed to login User");
+      setUpdateError(error.message || "Failed to Update Flock");
       console.log(`Failed to Update flock`, error.message);
     } finally {
       setUpdateLoading(false);

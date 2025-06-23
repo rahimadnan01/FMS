@@ -45,7 +45,9 @@ function Navbar() {
             <NavLink className={"nav-link"}>Staff</NavLink>
           </li>
           <li>
-            <NavLink className={"nav-link"}>Add Flock</NavLink>
+            <NavLink to={"/FMS/flocks/addFlock"} className={"nav-link"}>
+              Add Flock
+            </NavLink>
           </li>
           <li>
             <NavLink className={"nav-link"}>Add Staff</NavLink>

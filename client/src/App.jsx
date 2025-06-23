@@ -13,6 +13,7 @@ import ViewFlockPage from "./pages/ViewFlockPage";
 import DailyReportsPage from "./pages/DailyReportsPage";
 import MonthlyReports from "./pages/MonthlyReports";
 import WeeklyReports from "./pages/WeeklyReports";
+import AddFlockPage from "./pages/AddFlock";
 
 const router = createBrowserRouter([
   {
@@ -50,6 +51,10 @@ const router = createBrowserRouter([
   {
     path: "/FMS/flocks/:id/weeklyReports",
     element: <WeeklyReports />,
+  },
+  {
+    path: "/FMS/flocks/addFlock",
+    element: <AddFlockPage />,
   },
 ]);
 function App() {
