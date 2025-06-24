@@ -8,6 +8,8 @@ const useFetch = (url) => {
 
   useEffect(() => {
     if (!url) return;
+    setData(null);
+    console.log("useFetch: fetching url:", url); // Debug log
     const controller = new AbortController();
 
     const fetchData = async () => {
@@ -17,7 +19,7 @@ const useFetch = (url) => {
           signal: controller.signal,
         });
         if (response.status >= 200 && response.status <= 300) {
-          console.log(response.data.data);
+          console.log("useFetch: response data:", response.data.data); // Debug log
           setData(response.data.data);
           setError(null);
         }

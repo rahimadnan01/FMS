@@ -15,9 +15,11 @@ const formatDate = (isoString) => {
 
 function ViewDailyReport() {
   let { id, dailyReportId } = useParams();
+  console.log(dailyReportId);
   const { data, error, loading } = useFetch(
     `https://fms-1-drlz.onrender.com/api/v1/flocks/${id}/dailyReport/${dailyReportId}`
   );
+
   if (loading)
     return (
       <div className="loader-overlay">

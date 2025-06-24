@@ -266,7 +266,11 @@ const getSingleReport = wrapAsync(async (req, res) => {
   if (!flock) {
     throw new ApiError(404, "Flock not found");
   }
-  const singleDailyReport = await DailyReport.findOne({ flock: flock._id });
+  // FIX: Find the daily report by its _id and flock
+  const singleDailyReport = await DailyReport.findOne({
+    _id: dailyReportId,
+    flock: flock._id,
+  });
   if (!singleDailyReport) {
     throw new ApiError(404, "Daily report not found");
   }
@@ -299,5 +303,5 @@ export {
   deleteOneReport,
   deleteAllReport,
   getSingleReport,
-  getAllReports
+  getAllReports,
 };
