@@ -8,7 +8,11 @@ import LoginPage from "./pages/LoginPage";
 import HomePage from "./pages/HomePage";
 import FlocksPage from "./pages/FlocksPage";
 import UpdateFlockPage from "./pages/UpdateFlockPage";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  BrowserRouter,
+} from "react-router-dom";
 import ViewFlockPage from "./pages/ViewFlockPage";
 import DailyReportsPage from "./pages/DailyReportsPage";
 import MonthlyReports from "./pages/MonthlyReports";
@@ -21,6 +25,9 @@ import ViewMonthlyReport from "./pages/ViewMonthlyReport";
 import AddMonthlyReport from "./pages/AddMonthlyReport";
 import ViewWeeklyReport from "./pages/ViewWeeklyReport";
 import AddWeeklyReport from "./pages/AddWeeklyReport";
+import Staff from "./pages/Staff";
+import AddStaff from "./pages/AddStaff";
+import LoginAlert from "./components/UI/LoginAlert";
 const router = createBrowserRouter([
   {
     path: "/FMS/Login",
@@ -90,10 +97,19 @@ const router = createBrowserRouter([
     path: "/FMS/flocks/:id/weeklyReport/add",
     element: <AddWeeklyReport />,
   },
+  {
+    path: "/FMS/staff",
+    element: <Staff />,
+  },
+  {
+    path: "/FMS/add-staff",
+    element: <AddStaff />,
+  },
 ]);
 function App() {
   return (
     <>
+      <LoginAlert />
       <RouterProvider router={router} />
     </>
   );

@@ -6,6 +6,7 @@ import NoDataFound from "../components/UI/NoDataFound";
 import useFetch from "../hooks/useFetch";
 import ErrorMessage from "../components/UI/ErrorMessage";
 import "./DailyReportsPage.css";
+import { useAuth } from "../context/AuthProvider";
 
 const formatDate = (isoString) => {
   const options = { year: "numeric", month: "long", day: "numeric" };
@@ -13,6 +14,7 @@ const formatDate = (isoString) => {
 };
 
 function DailyReportsPage() {
+  const { user } = useAuth();
   const navigate = useNavigate();
   const { id } = useParams();
   let { data, loading, error } = useFetch(
@@ -79,6 +81,7 @@ function DailyReportsPage() {
             buttonText="Add Daily Report"
             buttonLink={`/FMS/flocks/${id}/dailyReports/add`}
             icon="sad-tear"
+            disabled={!user?.role || user?.role === "staff"}
           />
         ) : (
           data.map((report) => (
@@ -92,6 +95,7 @@ function DailyReportsPage() {
                   variant="contained"
                   color="error"
                   onClick={() => handleDeleteReport(report._id)}
+                  disabled={!user?.role || user?.role === "staff"}
                 >
                   Delete Report
                 </Button>
@@ -109,6 +113,7 @@ function DailyReportsPage() {
                 <Button
                   variant="contained"
                   onClick={() => handleUpdateReport(report._id)}
+                  disabled={!user?.role || user?.role === "staff"}
                 >
                   Update Report
                 </Button>
@@ -126,16 +131,19 @@ function DailyReportsPage() {
               display: data.length == 0 ? "none" : "block",
             }}
             onClick={handleDeleteAllReports}
+            disabled={!user?.role || user?.role === "staff"}
           >
             Delete Reports
           </Button>
         </div>
         <div className="add-report-btn">
-          <NavLink to={`/FMS/flocks/${id}/dailyReports/add`}>
-            <Button variant="contained" color="success">
-              Add Daily Report
-            </Button>
-          </NavLink>
+          <Button
+            variant="contained"
+            color="success"
+            disabled={!user?.role || user?.role === "staff"}
+          >
+            Add Daily Report
+          </Button>
         </div>
       </div>
     </div>

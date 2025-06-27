@@ -7,7 +7,9 @@ import ErrorMessage from "../components/UI/ErrorMessage";
 import { NavLink, useNavigate } from "react-router-dom";
 import "../pages/FlocksPage.css";
 import axios from "axios";
+import { useAuth } from "../context/AuthProvider";
 function FlocksPage() {
+  const { user } = useAuth();
   const navigate = useNavigate();
   let { data, loading, error } = useFetch(
     `https://fms-1-drlz.onrender.com/api/v1/flocks`
@@ -87,6 +89,7 @@ function FlocksPage() {
                     variant="contained"
                     color="error"
                     onClick={() => handleDeleteFlock(flock.flock._id)}
+                    disabled={!user?.role || user?.role === "staff"}
                   >
                     Delete Flock
                   </Button>
@@ -104,6 +107,7 @@ function FlocksPage() {
                   <Button
                     variant="contained"
                     onClick={() => handleUpdateFlock(flock.flock._id)}
+                    disabled={!user?.role || user?.role === "staff"}
                   >
                     Update Flock
                   </Button>
@@ -120,6 +124,7 @@ function FlocksPage() {
               display: data.length == 0 ? "none" : "block",
             }}
             onClick={handleDeleteAllFlock}
+            disabled={!user?.role || user?.role === "staff"}
           >
             Delete All flocks
           </Button>

@@ -1,0 +1,82 @@
+.staff-main {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 100%);
+  padding-bottom: 2rem;
+}
+
+.staff-title {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #3730a3;
+  margin: 2rem 0 1.5rem 0;
+  letter-spacing: 1px;
+}
+
+.staff-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+}
+
+.staff-card {
+  background: #fff;
+  border-radius: 1.2rem;
+  box-shadow: 0 4px 24px rgba(55, 48, 163, 0.08);
+  padding: 2rem 2.5rem;
+  min-width: 260px;
+  max-width: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.staff-card:hover {
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 8px 32px rgba(55, 48, 163, 0.16);
+}
+
+.staff-avatar {
+  width: 70px;
+  height: 70px;
+  background: #6366f1;
+  color: #fff;
+  font-size: 2.5rem;
+  font-weight: 700;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.2rem;
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.12);
+}
+
+.staff-info h2 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.4rem;
+  color: #3730a3;
+}
+
+.staff-info p {
+  margin: 0 0 0.5rem 0;
+  color: #4b5563;
+  font-size: 1rem;
+}
+
+.staff-role {
+  background: #e0e7ff;
+  color: #3730a3;
+  padding: 0.3rem 0.8rem;
+  border-radius: 1rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.no-staff {
+  text-align: center;
+  margin-top: 4rem;
+  color: #64748b;
+  font-size: 1.3rem;
+}

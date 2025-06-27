@@ -1,0 +1,97 @@
+.add-staff-main {
+  height: 100vh;
+  width: 100vw;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  overflow-x: hidden;
+  background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%);
+}
+
+.add-staff-form-main {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.add-staff-form {
+  width: 50%;
+  min-width: 340px;
+  max-width: 600px;
+  background: #fff;
+  padding: 2.5rem 2rem 2rem 2rem;
+  border-radius: 18px;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.text-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.error-text {
+  color: #e53935;
+  font-size: 0.95rem;
+  margin-top: 0.2rem;
+}
+
+.loader-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(255, 255, 255, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.diamond-loader {
+  display: flex;
+  gap: 0.5rem;
+}
+.diamond-loader span {
+  width: 18px;
+  height: 18px;
+  background: #1976d2;
+  display: block;
+  transform: rotate(45deg);
+  animation: diamond-bounce 1.2s infinite alternate;
+}
+.diamond-loader span:nth-child(2) {
+  background: #64b5f6;
+  animation-delay: 0.2s;
+}
+.diamond-loader span:nth-child(3) {
+  background: #90caf9;
+  animation-delay: 0.4s;
+}
+@keyframes diamond-bounce {
+  0% {
+    transform: rotate(45deg) translateY(0);
+  }
+  100% {
+    transform: rotate(45deg) translateY(-18px);
+  }
+}
+
+button.MuiButton-contained {
+  background: linear-gradient(90deg, #1976d2 0%, #64b5f6 100%);
+  color: #fff;
+  font-weight: 600;
+  letter-spacing: 1px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(25, 118, 210, 0.08);
+  transition: background 0.2s;
+}
+button.MuiButton-contained:hover {
+  background: linear-gradient(90deg, #1565c0 0%, #42a5f5 100%);
+}

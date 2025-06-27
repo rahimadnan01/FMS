@@ -5,6 +5,7 @@ import { Button } from "@mui/material";
 import NoDataFound from "../components/UI/NoDataFound";
 import useFetch from "../hooks/useFetch";
 import ErrorMessage from "../components/UI/ErrorMessage";
+import { useAuth } from "../context/AuthProvider";
 import "./DailyReportsPage.css";
 
 const monthNames = [
@@ -23,6 +24,7 @@ const monthNames = [
 ];
 
 function MonthlyReports() {
+  const { user } = useAuth();
   const navigate = useNavigate();
   const { id } = useParams();
   let { data, loading, error } = useFetch(
@@ -102,6 +104,7 @@ function MonthlyReports() {
                   variant="contained"
                   color="error"
                   onClick={() => handleDeleteReport(report._id)}
+                  disabled={!user?.role || user?.role === "staff"}
                 >
                   Delete Report
                 </Button>
@@ -128,25 +131,22 @@ function MonthlyReports() {
               display: data.length == 0 ? "none" : "block",
             }}
             onClick={handleDeleteAllReports}
+            disabled={!user?.role || user?.role === "staff"}
           >
             Delete Reports
           </Button>
         </div>
         <div className="add-report-btn">
-          <NavLink
-            to={`/FMS/flocks/${id}/monthlyReports/add`}
-            style={{ textDecoration: "none" }}
+          <Button
+            variant="contained"
+            color="success"
+            style={{
+              display: data.length == 0 ? "none" : "block",
+            }}
+            disabled={!user?.role || user?.role === "staff"}
           >
-            <Button
-              variant="contained"
-              color="success"
-              style={{
-                display: data.length == 0 ? "none" : "block",
-              }}
-            >
-              Add Monthly Report
-            </Button>
-          </NavLink>
+            Add Monthly Report
+          </Button>
         </div>
       </div>
     </div>

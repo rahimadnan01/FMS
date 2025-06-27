@@ -5,6 +5,7 @@ import { Button } from "@mui/material";
 import NoDataFound from "../components/UI/NoDataFound";
 import useFetch from "../hooks/useFetch";
 import ErrorMessage from "../components/UI/ErrorMessage";
+import { useAuth } from "../context/AuthProvider";
 import "./DailyReportsPage.css";
 
 // Helper function to format ISO date string to readable format
@@ -14,6 +15,7 @@ const formatDate = (isoString) => {
 };
 
 function WeeklyReports() {
+  const { user } = useAuth();
   const navigate = useNavigate();
   const { id } = useParams();
 
@@ -94,6 +96,7 @@ function WeeklyReports() {
                   variant="contained"
                   color="error"
                   onClick={() => handleDeleteReport(report._id)}
+                  disabled={!user?.role || user?.role === "staff"}
                 >
                   Delete Report
                 </Button>
@@ -120,25 +123,22 @@ function WeeklyReports() {
               display: data.length == 0 ? "none" : "block",
             }}
             onClick={handleDeleteAllReports}
+            disabled={!user?.role || user?.role === "staff"}
           >
             Delete Reports
           </Button>
         </div>
         <div className="add-report-btn">
-          <NavLink
-            to={`/FMS/flocks/${id}/weeklyReport/add`}
-            style={{ textDecoration: "none" }}
+          <Button
+            variant="contained"
+            color="success"
+            style={{
+              display: data.length == 0 ? "none" : "block",
+            }}
+            disabled={!user?.role || user?.role === "staff"}
           >
-            <Button
-              variant="contained"
-              color="success"
-              style={{
-                display: data.length == 0 ? "none" : "block",
-              }}
-            >
-              Add Weekly Report
-            </Button>
-          </NavLink>
+            Add Weekly Report
+          </Button>
         </div>
       </div>
     </div>
