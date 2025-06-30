@@ -1,3 +1,4 @@
 {
-  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+  "redirects": [{ "source": "/", "destination": "/FMS", "permanent": true }],
+  "rewrites": [{ "source": "/FMS/(.*)", "destination": "/index.html" }]
 }
