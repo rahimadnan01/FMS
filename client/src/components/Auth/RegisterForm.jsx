@@ -6,7 +6,7 @@ import Button from "@mui/material/Button";
 import "./RegisterForm.css";
 import TextField from "@mui/material/TextField";
 import axios from "axios";
-import ErrorMessage  from "../UI/ErrorMessage";
+import ErrorMessage from "../UI/ErrorMessage";
 function RegisterForm({ userRole }) {
   const {
     register,
@@ -88,10 +88,16 @@ function RegisterForm({ userRole }) {
               label="Email"
               autoComplete="off"
               variant="outlined"
-              {...register("email", { required: true })}
+              {...register("email", {
+                required: "Email is required",
+                pattern: {
+                  value: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/,
+                  message: "Please enter a valid email address",
+                },
+              })}
             />
             {errors.email && (
-              <span className="error-text">Email is required</span>
+              <span className="error-text">{errors.email.message}</span>
             )}
           </div>
           <div className="text-field">
