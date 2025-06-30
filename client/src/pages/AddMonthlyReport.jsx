@@ -31,7 +31,7 @@ function AddMonthlyReport() {
       );
       if (response.status >= 200 && response.status <= 300) {
         console.log(` Monthly Report Added  successfully`, response.data.data);
-        navigate(`/FMS/flocks/${id}/monthlyReports`);
+        navigate(`/flocks/${id}/monthlyReports`);
         reset();
       }
     } catch (error) {

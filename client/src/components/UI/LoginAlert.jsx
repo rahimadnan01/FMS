@@ -7,7 +7,7 @@ const LoginAlert = () => {
   const path = window.location.pathname;
 
   // Hide alert on login or register page
-  if (isLogin || path === "/FMS/login" || path === "/FMS/register") return null;
+  if (isLogin || path === "/login" || path === "/register") return null;
 
   return (
     <div className="login-alert-overlay">
@@ -16,7 +16,7 @@ const LoginAlert = () => {
         <p>You must be logged in to use this application.</p>
         <Button
           variant="contained"
-          onClick={() => (window.location.href = "/FMS/login")}
+          onClick={() => (window.location.href = "/login")}
         >
           Go to Login
         </Button>

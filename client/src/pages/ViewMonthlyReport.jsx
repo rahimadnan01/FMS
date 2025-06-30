@@ -83,7 +83,7 @@ function ViewMonthlyReport() {
           </CardContent>
         </Card>
         <div className="report-buttons">
-          <NavLink to={`/FMS/flocks/${id}/monthlyReports`}>
+          <NavLink to={`/flocks/${id}/monthlyReports`}>
             <Button variant="contained" color="success">
               Back
             </Button>

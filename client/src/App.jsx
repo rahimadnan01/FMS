@@ -30,79 +30,79 @@ import AddStaff from "./pages/AddStaff";
 import LoginAlert from "./components/UI/LoginAlert";
 const router = createBrowserRouter([
   {
-    path: "/FMS/Login",
+    path: "/login",
     element: <LoginPage />,
   },
   {
-    path: "/FMS/register",
+    path: "/register",
     element: <RegisterPage />,
   },
   {
-    path: "/FMS",
+    path: "/",
     element: <HomePage />,
   },
   {
-    path: "/FMS/flocks",
+    path: "/flocks",
     element: <FlocksPage />,
   },
   {
-    path: "/FMS/flocks/:id",
+    path: "/flocks/:id",
     element: <ViewFlockPage />,
   },
   {
-    path: "/FMS/flocks/:id/updateFlock",
+    path: "/flocks/:id/updateFlock",
     element: <UpdateFlockPage />,
   },
   {
-    path: "/FMS/flocks/:id/dailyReports",
+    path: "/flocks/:id/dailyReports",
     element: <DailyReportsPage />,
   },
   {
-    path: "/FMS/flocks/:id/monthlyReports",
+    path: "/flocks/:id/monthlyReports",
     element: <MonthlyReports />,
   },
   {
-    path: "/FMS/flocks/:id/weeklyReports",
+    path: "/flocks/:id/weeklyReports",
     element: <WeeklyReports />,
   },
   {
-    path: "/FMS/flocks/addFlock",
+    path: "/flocks/addFlock",
     element: <AddFlockPage />,
   },
   {
-    path: "/FMS/flocks/:id/dailyReports/:dailyReportId",
+    path: "/flocks/:id/dailyReports/:dailyReportId",
     element: <ViewDailyReport />,
   },
   {
-    path: "/FMS/flocks/:id/dailyReports/:dailyReportId/update",
+    path: "/flocks/:id/dailyReports/:dailyReportId/update",
     element: <UpdateDailyReport />,
   },
   {
-    path: "/FMS/flocks/:id/dailyReports/add",
+    path: "/flocks/:id/dailyReports/add",
     element: <AddDailyReport />,
   },
   {
-    path: "/FMS/flocks/:id/monthlyReports/:monthlyReportId",
+    path: "/flocks/:id/monthlyReports/:monthlyReportId",
     element: <ViewMonthlyReport />,
   },
   {
-    path: "/FMS/flocks/:id/monthlyReports/add",
+    path: "/flocks/:id/monthlyReports/add",
     element: <AddMonthlyReport />,
   },
   {
-    path: "/FMS/flocks/:id/weeklyReport/:weeklyReportId",
+    path: "/flocks/:id/weeklyReport/:weeklyReportId",
     element: <ViewWeeklyReport />,
   },
   {
-    path: "/FMS/flocks/:id/weeklyReport/add",
+    path: "/flocks/:id/weeklyReport/add",
     element: <AddWeeklyReport />,
   },
   {
-    path: "/FMS/staff",
+    path: "/staff",
     element: <Staff />,
   },
   {
-    path: "/FMS/add-staff",
+    path: "/add-staff",
     element: <AddStaff />,
   },
 ]);

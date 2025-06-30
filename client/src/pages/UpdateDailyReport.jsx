@@ -32,7 +32,7 @@ function UpdateDailyReport() {
       );
       if (response.status >= 200 && response.status <= 300) {
         console.log(` Daily Report Updated  successfully`, response.data.data);
-        navigate(`/FMS/flocks/${id}/dailyReports`);
+        navigate(`/flocks/${id}/dailyReports`);
         reset();
       }
     } catch (error) {

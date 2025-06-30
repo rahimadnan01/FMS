@@ -36,7 +36,7 @@ function LoginForm({ userRole }) {
           response.data.data.loggedInUser
         );
         login(response.data.data.loggedInUser);
-        navigate("/FMS");
+        navigate("/");
         reset();
       }
     } catch (error) {
@@ -101,9 +101,7 @@ function LoginForm({ userRole }) {
           </div>
           <div className="register-link">
             <li className="login-link">
-              <NavLink to="/FMS/register">
-                Do not have an account? Signup
-              </NavLink>
+              <NavLink to="/register">Do not have an account? Signup</NavLink>
             </li>
           </div>
           <div>

@@ -30,7 +30,7 @@ function RegisterForm({ userRole }) {
 
       if (response.status >= 200 && response.status <= 300) {
         console.log(`${userRole} registered successfully`, response.data);
-        navigate("/FMS/login");
+        navigate("/login");
         reset();
       }
     } catch (error) {
@@ -106,7 +106,7 @@ function RegisterForm({ userRole }) {
           </div>
           <div className="register-link">
             <li className="login-link">
-              <NavLink to="/FMS/login">Have already registered,Login?</NavLink>
+              <NavLink to="/login">Have already registered,Login?</NavLink>
             </li>
           </div>
           <div>

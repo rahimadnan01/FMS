@@ -30,29 +30,29 @@ function Navbar() {
   return (
     <div className="main-nav">
       <div className="logo">
-        <NavLink to={"/FMS"}>
+        <NavLink to={"/"}>
           <img src={navLogo} alt="" />
         </NavLink>
       </div>
       <div className="links">
         <ul>
           <li>
-            <NavLink to={"/FMS/flocks"} className={"nav-link"}>
+            <NavLink to={"/flocks"} className={"nav-link"}>
               Flocks
             </NavLink>
           </li>
           <li>
-            <NavLink to={"/FMS/staff"} className={"nav-link"}>
+            <NavLink to={"/staff"} className={"nav-link"}>
               Staff
             </NavLink>
           </li>
           <li>
-            <NavLink to={"/FMS/flocks/addFlock"} className={"nav-link"}>
+            <NavLink to={"/flocks/addFlock"} className={"nav-link"}>
               Add Flock
             </NavLink>
           </li>
           <li>
-            <NavLink to={"/FMS/add-staff"} className={"nav-link"}>
+            <NavLink to={"/add-staff"} className={"nav-link"}>
               Add Staff
             </NavLink>
           </li>
@@ -64,7 +64,7 @@ function Navbar() {
             <button onClick={handleLogout}>logout</button>
           </div>
         ) : (
-          <NavLink to={"/FMS/login"}>
+          <NavLink to={"/login"}>
             <button>Login</button>
           </NavLink>
         )}

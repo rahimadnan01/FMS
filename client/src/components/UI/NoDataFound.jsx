@@ -7,7 +7,7 @@ function NoDataFound({
   title = "No Data Found",
   subtitle = "Looks like there's nothing here yet.",
   buttonText = "Add New",
-  buttonLink = "/FMS/add-flock",
+  buttonLink = "/add-flock",
   icon = "sad-tear",
 }) {
   const navigate = useNavigate();

@@ -16,11 +16,11 @@ function FlocksPage() {
   );
 
   const handleViewFlock = (flockId) => {
-    navigate(`/FMS/flocks/${flockId}`);
+    navigate(`/flocks/${flockId}`);
   };
 
   const handleUpdateFlock = (flockId) => {
-    navigate(`/FMS/flocks/${flockId}/updateFlock`);
+    navigate(`/flocks/${flockId}/updateFlock`);
   };
 
   const handleDeleteFlock = async (flockId) => {
@@ -75,7 +75,7 @@ function FlocksPage() {
               title="No Flocks Available"
               subtitle="You haven’t added any flocks yet. Start by creating one."
               buttonText="Add Flock"
-              buttonLink="/FMS/flocks/addFlock"
+              buttonLink="/flocks/addFlock"
               icon="sad-tear"
             />
           ) : (

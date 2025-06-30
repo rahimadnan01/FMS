@@ -32,7 +32,7 @@ function MonthlyReports() {
   );
 
   const handleViewReport = (monthlyReportId) => {
-    navigate(`/FMS/flocks/${id}/monthlyReports/${monthlyReportId}`);
+    navigate(`/flocks/${id}/monthlyReports/${monthlyReportId}`);
   };
 
   const handleDeleteReport = async (monthlyReportId) => {
@@ -85,7 +85,7 @@ function MonthlyReports() {
             title="No Monthly Reports Available"
             subtitle="You haven’t added any Monthly Reports yet. Start by creating one."
             buttonText="Add Monthly Report"
-            buttonLink={`/FMS/flocks/${id}/monthlyReports/add`}
+            buttonLink={`/flocks/${id}/monthlyReports/add`}
             icon="sad-tear"
           />
         ) : (

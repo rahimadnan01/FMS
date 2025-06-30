@@ -66,7 +66,7 @@ function ViewDailyReport() {
           </CardContent>
         </Card>
         <div className="report-buttons">
-          <NavLink to={`/FMS/flocks/${id}/dailyReports`}>
+          <NavLink to={`/flocks/${id}/dailyReports`}>
             <Button variant="contained" color="success">
               Back
             </Button>
