@@ -32,7 +32,7 @@ function UpdateFlockPage() {
       );
       if (response.status >= 200 && response.status <= 300) {
         console.log(` flock Updated  successfully`, response.data.data);
-        navigate("/FMS/flocks");
+        navigate("/flocks");
         reset();
       }
     } catch (error) {

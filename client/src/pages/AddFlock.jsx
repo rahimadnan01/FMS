@@ -28,7 +28,7 @@ function AddFlockPage() {
       );
       if (response.status >= 200 && response.status <= 300) {
         console.log(` flock Added  successfully`, response.data.data);
-        navigate("/FMS/flocks");
+        navigate("/flocks");
         reset();
       }
     } catch (error) {

@@ -22,11 +22,11 @@ function DailyReportsPage() {
   );
 
   const handleViewReport = (dailyReportId) => {
-    navigate(`/FMS/flocks/${id}/dailyReports/${dailyReportId}`);
+    navigate(`/flocks/${id}/dailyReports/${dailyReportId}`);
   };
 
   const handleUpdateReport = (dailyReportId) => {
-    navigate(`/FMS/flocks/${id}/dailyReports/${dailyReportId}/update`);
+    navigate(`/flocks/${id}/dailyReports/${dailyReportId}/update`);
   };
 
   const handleDeleteReport = async (dailyReportId) => {
@@ -79,7 +79,7 @@ function DailyReportsPage() {
             title="No Daily Reports Available"
             subtitle="You haven’t added any Daily Reports yet. Start by creating one."
             buttonText="Add Daily Report"
-            buttonLink={`/FMS/flocks/${id}/dailyReports/add`}
+            buttonLink={`/flocks/${id}/dailyReports/add`}
             icon="sad-tear"
             disabled={!user?.role || user?.role === "staff"}
           />

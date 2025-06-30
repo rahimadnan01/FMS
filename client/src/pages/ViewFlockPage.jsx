@@ -18,15 +18,15 @@ function ViewFlockPage() {
   const buttons = [
     {
       label: "View Daily Reports",
-      to: `/FMS/flocks/${id}/dailyReports`,
+      to: `/flocks/${id}/dailyReports`,
     },
     {
       label: "View Monthly Reports ",
-      to: `/FMS/flocks/${id}/monthlyReports`,
+      to: `/flocks/${id}/monthlyReports`,
     },
     {
       label: "View Weekly Reports ",
-      to: `/FMS/flocks/${id}/weeklyReports`,
+      to: `/flocks/${id}/weeklyReports`,
     },
   ];
   const { data, error, loading } = useFetch(

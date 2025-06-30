@@ -31,7 +31,7 @@ function AddStaff() {
         { withCredentials: true }
       );
       if (response.status >= 200 && response.status < 300) {
-        navigate("/FMS/login");
+        navigate("/login");
         reset();
       }
     } catch (error) {

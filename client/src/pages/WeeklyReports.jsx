@@ -24,7 +24,7 @@ function WeeklyReports() {
   );
 
   const handleViewReport = (weeklyReportId) => {
-    navigate(`/FMS/flocks/${id}/weeklyReport/${weeklyReportId}`);
+    navigate(`/flocks/${id}/weeklyReport/${weeklyReportId}`);
   };
 
   const handleDeleteReport = async (weeklyReportId) => {
@@ -77,7 +77,7 @@ function WeeklyReports() {
             title="No Weekly Reports Available"
             subtitle="You haven’t added any Weekly Reports yet. Start by creating one."
             buttonText="Add Weekly Report"
-            buttonLink={`/FMS/flocks/${id}/weeklyReport/add`}
+            buttonLink={`/flocks/${id}/weeklyReport/add`}
             icon="sad-tear"
           />
         ) : (

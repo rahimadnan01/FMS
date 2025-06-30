@@ -30,7 +30,7 @@ function AddWeeklyReport() {
       );
       if (response.status >= 200 && response.status <= 300) {
         console.log(`Weekly Report Added successfully`, response.data.data);
-        navigate(`/FMS/flocks/${id}/weeklyReports`);
+        navigate(`/flocks/${id}/weeklyReports`);
         reset();
       }
     } catch (error) {
