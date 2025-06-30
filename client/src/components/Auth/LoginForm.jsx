@@ -22,6 +22,18 @@ function LoginForm({ userRole }) {
   } = useForm();
 
   const navigate = useNavigate();
+  const getErrorMessage = (error) => {
+    if (error.response?.data?.message) return error.response.data.message;
+    if (error.response?.status === 401)
+      return "Unauthorized: Invalid credentials.";
+    if (error.response?.status === 403)
+      return "Forbidden: You do not have permission.";
+    if (error.response?.status === 404) return "Not found.";
+    if (error.response?.status === 500)
+      return "Server error. Please try again later.";
+    return error.message || "Failed to login User";
+  };
+
   const onSubmit = async (data) => {
     setLoading(true);
     try {
@@ -40,8 +52,8 @@ function LoginForm({ userRole }) {
         reset();
       }
     } catch (error) {
-      setError(error.message || "Failed to login User");
-      console.log(`Failed to login user`, error.message);
+      setError(getErrorMessage(error));
+      console.log(`Failed to login user`, getErrorMessage(error));
     } finally {
       setLoading(false);
     }

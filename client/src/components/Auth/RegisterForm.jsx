@@ -19,6 +19,18 @@ function RegisterForm({ userRole }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  const getErrorMessage = (error) => {
+    if (error.response?.data?.message) return error.response.data.message;
+    if (error.response?.status === 401)
+      return "Unauthorized: Invalid credentials.";
+    if (error.response?.status === 403)
+      return "Forbidden: You do not have permission.";
+    if (error.response?.status === 404) return "Not found.";
+    if (error.response?.status === 500)
+      return "Server error. Please try again later.";
+    return error.message || "Failed to register user";
+  };
+
   const onSubmit = async (data) => {
     try {
       setLoading(true);
@@ -34,8 +46,8 @@ function RegisterForm({ userRole }) {
         reset();
       }
     } catch (error) {
-      setError(error.message || "Failed to login User");
-      console.log("failed to register User");
+      setError(getErrorMessage(error));
+      console.log("failed to register User", getErrorMessage(error));
     } finally {
       setLoading(false);
     }

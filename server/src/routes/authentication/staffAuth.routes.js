@@ -6,7 +6,7 @@ import {
   registerStaff,
 } from "../../controllers/Staff.controller.js";
 import { verifyJwt } from "../../middlewares/auth.middelware.js";
-router.route("/staff/register").post(registerStaff);
+router.route("/staff/register").post(verifyJwt("admin"), registerStaff);
 router.route("/staff/login").post(loginStaff);
 router.route("/staff/logout").post(verifyJwt("staff"), logoutStaff);
 export default router;
