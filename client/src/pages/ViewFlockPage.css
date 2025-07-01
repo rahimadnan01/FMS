@@ -66,3 +66,19 @@
   padding: 2rem 0;
   gap: 1rem;
 }
+
+@media (max-width: 575.98px) {
+  .flock-card {
+    max-width: 20rem;
+    margin: 4rem auto;
+  }
+
+  .report-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 2rem 0;
+    gap: 1rem;
+  }
+}

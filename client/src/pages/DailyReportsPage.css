@@ -41,4 +41,18 @@
   padding: 3rem 0;
 }
 
+@media (max-width: 575.98px) {
+  .daily-report-col {
+    height: 68%;
+    flex-direction: column;
+    align-items: center;
+  }
 
+  .report-date h3 {
+    margin-left: 2rem;
+  }
+
+  .page-end-btns {
+    width: 90%;
+  }
+}

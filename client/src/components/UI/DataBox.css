@@ -37,3 +37,9 @@
   justify-content: space-evenly;
   align-items: center;
 }
+
+@media (max-width: 575.98px) {
+  .dataBox {
+    width: 90%;
+  }
+}

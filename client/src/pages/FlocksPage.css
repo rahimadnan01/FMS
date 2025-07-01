@@ -38,3 +38,14 @@
 .delete-all {
   padding: 2rem 5rem;
 }
+@media (max-width: 575.98px) {
+  .flock-col {
+    flex-direction: column;
+    column-gap: 3rem;
+    height: 15rem;
+  }
+
+  .delete-all {
+    padding: 2rem 8rem;
+  }
+}
