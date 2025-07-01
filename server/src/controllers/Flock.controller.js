@@ -4,6 +4,8 @@ import { ApiResponse } from "../utils/ApiResponse.js";
 import { wrapAsync } from "../utils/wrapAsync.js";
 import { FeedStock } from "../models/FeedStock.model.js";
 import { DailyReport } from "../models/DailyReport.model.js";
+import { WeeklyReport } from "../models/WeeklyReport.model.js";
+import { MonthlyReport } from "../models/MonthlyReport.model.js";
 const addFlock = wrapAsync(async (req, res) => {
   const { name, breed, totalBirds, totalFeedStock } = req.body;
   if (!name || !breed || !totalBirds || !totalFeedStock) {
@@ -119,6 +121,14 @@ const deleteOneFlock = wrapAsync(async (req, res) => {
   const deletedDailyReport = await DailyReport.deleteMany({
     flock: flock._id,
   });
+
+  const deletedMonthlyReports = await MonthlyReport.deleteMany({
+    flock: flock._id,
+  });
+  const deletedWeeklyReports = await WeeklyReport.deleteMany({
+    flock: flock._id,
+  });
+
   if (!deletedDailyReport) {
     throw new ApiError(401, "No daily reports found to delete");
   }
@@ -127,6 +137,8 @@ const deleteOneFlock = wrapAsync(async (req, res) => {
       deletedFeedStock,
       deletedFlock,
       deletedDailyReport,
+      deletedMonthlyReports,
+      deletedWeeklyReports,
     })
   );
 });
