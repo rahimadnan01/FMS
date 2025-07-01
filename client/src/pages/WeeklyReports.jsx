@@ -129,16 +129,19 @@ function WeeklyReports() {
           </Button>
         </div>
         <div className="add-report-btn">
-          <Button
-            variant="contained"
-            color="success"
-            style={{
-              display: data.length == 0 ? "none" : "block",
-            }}
-            disabled={!user?.role || user?.role === "staff"}
+          <NavLink
+            to={`/flocks/${id}/weeklyReport/add`}
+            className="no-decoration"
+            style={{ textDecoration: "none" }}
           >
-            Add Weekly Report
-          </Button>
+            <Button
+              variant="contained"
+              color="success"
+              disabled={!user?.role || user?.role === "staff"}
+            >
+              Add Weekly Report
+            </Button>
+          </NavLink>
         </div>
       </div>
     </div>
@@ -146,3 +149,4 @@ function WeeklyReports() {
 }
 
 export default WeeklyReports;
+

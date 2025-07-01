@@ -41,6 +41,10 @@
   padding: 3rem 0;
 }
 
+.no-decoration {
+  text-decoration: none !important;
+}
+
 @media (max-width: 575.98px) {
   .daily-report-col {
     height: 68%;

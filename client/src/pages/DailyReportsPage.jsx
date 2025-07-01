@@ -137,13 +137,19 @@ function DailyReportsPage() {
           </Button>
         </div>
         <div className="add-report-btn">
-          <Button
-            variant="contained"
-            color="success"
-            disabled={!user?.role || user?.role === "staff"}
+          <NavLink
+            to={`/flocks/${id}/dailyReports/add`}
+            className="no-decoration"
+            style={{ textDecoration: "none" }}
           >
-            Add Daily Report
-          </Button>
+            <Button
+              variant="contained"
+              color="success"
+              disabled={!user?.role || user?.role === "staff"}
+            >
+              Add Daily Report
+            </Button>
+          </NavLink>
         </div>
       </div>
     </div>
@@ -151,3 +157,5 @@ function DailyReportsPage() {
 }
 
 export default DailyReportsPage;
+
+

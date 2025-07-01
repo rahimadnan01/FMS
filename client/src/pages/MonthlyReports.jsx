@@ -137,16 +137,19 @@ function MonthlyReports() {
           </Button>
         </div>
         <div className="add-report-btn">
-          <Button
-            variant="contained"
-            color="success"
-            style={{
-              display: data.length == 0 ? "none" : "block",
-            }}
-            disabled={!user?.role || user?.role === "staff"}
+          <NavLink
+            to={`/flocks/${id}/monthlyReports/add`}
+            className="no-decoration"
+            style={{ textDecoration: "none" }}
           >
-            Add Monthly Report
-          </Button>
+            <Button
+              variant="contained"
+              color="success"
+              disabled={!user?.role || user?.role === "staff"}
+            >
+              Add Monthly Report
+            </Button>
+          </NavLink>
         </div>
       </div>
     </div>
@@ -154,3 +157,7 @@ function MonthlyReports() {
 }
 
 export default MonthlyReports;
+
+/* Add this to the bottom of the file for NavLink style */
+// In DailyReportsPage.css, add:
+// .no-decoration { text-decoration: none !important; }
