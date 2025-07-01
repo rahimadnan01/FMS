@@ -48,3 +48,9 @@
   margin-top: 0.25rem;
   margin-left: 0.25rem;
 }
+
+@media (max-width: 575.98px) {
+  .text-field-update {
+    flex-direction: column;
+  }
+}
