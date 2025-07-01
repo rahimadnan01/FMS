@@ -153,11 +153,29 @@
 
 /* Hide desktop links/profile on mobile, show hamburger */
 @media (max-width: 900px) {
+  .main-nav {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+    padding: 0 10px;
+  }
   .desktop-only {
     display: none !important;
   }
+  .logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    height: 100%;
+  }
   .menu-icon {
     display: block;
+    align-items: center;
+    justify-content: center;
+    margin-left: 0;
   }
   .navbar-slide-menu {
     display: flex;

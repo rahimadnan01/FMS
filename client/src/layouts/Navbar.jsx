@@ -41,7 +41,7 @@ function Navbar() {
           <img src={navLogo} alt="FMS Logo" />
         </NavLink>
       </div>
-      {/* Hamburger menu icon for mobile */}
+   
       <button
         className="menu-icon"
         aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
