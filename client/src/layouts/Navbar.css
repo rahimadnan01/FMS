@@ -154,12 +154,13 @@
 /* Hide desktop links/profile on mobile, show hamburger */
 @media (max-width: 900px) {
   .main-nav {
+    width: 85%;
+    height: 9vh;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    height: 60px;
-    padding: 0 10px;
+    padding: 5px 2px;
   }
   .desktop-only {
     display: none !important;
