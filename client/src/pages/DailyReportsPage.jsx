@@ -150,6 +150,14 @@ function DailyReportsPage() {
               Add Daily Report
             </Button>
           </NavLink>
+          <Button
+            variant="contained"
+            color="primary"
+            style={{ marginLeft: 12, marginTop: 8 }}
+            disabled={!user?.role || user?.role === "staff"}
+          >
+            Add Daily Report (No Navigation)
+          </Button>
         </div>
       </div>
     </div>
@@ -157,5 +165,3 @@ function DailyReportsPage() {
 }
 
 export default DailyReportsPage;
-
-

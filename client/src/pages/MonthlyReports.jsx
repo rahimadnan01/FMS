@@ -150,6 +150,14 @@ function MonthlyReports() {
               Add Monthly Report
             </Button>
           </NavLink>
+          <Button
+            variant="contained"
+            color="primary"
+            style={{ marginLeft: 12, marginTop: 8 }}
+            disabled={!user?.role || user?.role === "staff"}
+          >
+            Add Monthly Report (No Navigation)
+          </Button>
         </div>
       </div>
     </div>
