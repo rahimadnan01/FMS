@@ -142,14 +142,6 @@ function WeeklyReports() {
               Add Weekly Report
             </Button>
           </NavLink>
-          <Button
-            variant="contained"
-            color="primary"
-            style={{ marginLeft: 12, marginTop: 8 }}
-            disabled={!user?.role || user?.role === "staff"}
-          >
-            Add Weekly Report (No Navigation)
-          </Button>
         </div>
       </div>
     </div>
