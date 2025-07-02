@@ -1,6 +1,6 @@
 import { useParams, useNavigate, NavLink } from "react-router-dom";
 import Navbar from "../layouts/Navbar";
-import axios from "axios";
+import axiosInstance from "../utils/axiosInstance";
 import { Button } from "@mui/material";
 import NoDataFound from "../components/UI/NoDataFound";
 import useFetch from "../hooks/useFetch";
@@ -38,7 +38,7 @@ function MonthlyReports() {
   const handleDeleteReport = async (monthlyReportId) => {
     try {
       console.log(monthlyReportId);
-      const response = await axios.delete(
+      const response = await axiosInstance.delete(
         `https://fms-1-drlz.onrender.com/api/v1/flocks/${id}/monthlyReports/${monthlyReportId}`
       );
       console.log(response.data.data);
@@ -50,7 +50,7 @@ function MonthlyReports() {
 
   const handleDeleteAllReports = async () => {
     try {
-      const response = await axios.delete(
+      const response = await axiosInstance.delete(
         `https://fms-1-drlz.onrender.com/api/v1/flocks/${id}/monthlyReports`
       );
       console.log(response.data.data);
@@ -150,7 +150,6 @@ function MonthlyReports() {
               Add Monthly Report
             </Button>
           </NavLink>
-          
         </div>
       </div>
     </div>

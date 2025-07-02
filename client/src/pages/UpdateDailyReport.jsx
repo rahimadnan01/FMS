@@ -7,7 +7,7 @@ import LoadingSpinner from "../components/UI/LoadingSpinner";
 import ErrorMessage from "../components/UI/ErrorMessage";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-import axios from "axios";
+import axiosInstance from "../utils/axiosInstance";
 import "./UpdateFlock.css";
 import Navbar from "../layouts/Navbar";
 function UpdateDailyReport() {
@@ -26,7 +26,7 @@ function UpdateDailyReport() {
   const onSubmit = async (data) => {
     setUpdateLoading(true);
     try {
-      const response = await axios.put(
+      const response = await axiosInstance.put(
         `https://fms-1-drlz.onrender.com/api/v1/flocks/${id}/dailyReport/${dailyReportId}`,
         data
       );

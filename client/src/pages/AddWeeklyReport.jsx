@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 import Navbar from "../layouts/Navbar";
-import axios from "axios";
+import axiosInstance from "../utils/axiosInstance";
 import LoadingSpinner from "../components/UI/LoadingSpinner";
 import ErrorMessage from "../components/UI/ErrorMessage";
 import Button from "@mui/material/Button";
@@ -24,7 +24,7 @@ function AddWeeklyReport() {
   const onSubmit = async (data) => {
     setLoading(true);
     try {
-      const response = await axios.post(
+      const response = await axiosInstance.post(
         `https://fms-1-drlz.onrender.com/api/v1/flocks/${id}/weeklyReport`,
         data
       );

@@ -5,7 +5,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
 import "./RegisterForm.css";
 import TextField from "@mui/material/TextField";
-import axios from "axios";
+import axiosInstance from "../utils/axiosInstance";
 import ErrorMessage from "../UI/ErrorMessage";
 function RegisterForm({ userRole }) {
   const {
@@ -34,7 +34,7 @@ function RegisterForm({ userRole }) {
   const onSubmit = async (data) => {
     try {
       setLoading(true);
-      const response = await axios.post(
+      const response = await axiosInstance.post(
         `https://fms-1-drlz.onrender.com/api/v1/${userRole}/register`,
         data,
         { withCredentials: true }

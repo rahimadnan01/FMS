@@ -2,7 +2,7 @@ import { navLogo } from "../assets/images/images";
 import { NavLink } from "react-router-dom";
 import "../layouts/Navbar.css";
 import { useAuth } from "../context/AuthProvider";
-import axios from "axios";
+import axiosInstance from "../utils/axiosInstance";
 import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
@@ -18,7 +18,7 @@ function Navbar() {
   const handleLogout = async () => {
     try {
       console.log(role);
-      const response = await axios.post(
+      const response = await axiosInstance.post(
         `https://fms-1-drlz.onrender.com/api/v1/${role}/logout`,
         {},
         {
@@ -41,7 +41,7 @@ function Navbar() {
           <img src={navLogo} alt="FMS Logo" />
         </NavLink>
       </div>
-   
+
       <button
         className="menu-icon"
         aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}

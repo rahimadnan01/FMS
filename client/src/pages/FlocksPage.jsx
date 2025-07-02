@@ -6,7 +6,7 @@ import NoDataFound from "../components/UI/NoDataFound";
 import ErrorMessage from "../components/UI/ErrorMessage";
 import { NavLink, useNavigate } from "react-router-dom";
 import "../pages/FlocksPage.css";
-import axios from "axios";
+import axiosInstance from "../utils/axiosInstance";
 import { useAuth } from "../context/AuthProvider";
 function FlocksPage() {
   const { user } = useAuth();
@@ -26,7 +26,7 @@ function FlocksPage() {
   const handleDeleteFlock = async (flockId) => {
     try {
       console.log(flockId);
-      const response = await axios.delete(
+      const response = await axiosInstance.delete(
         `https://fms-1-drlz.onrender.com/api/v1/flocks/${flockId}`
       );
       console.log(response.data.data);
@@ -38,7 +38,7 @@ function FlocksPage() {
 
   const handleDeleteAllFlock = async () => {
     try {
-      const response = await axios.delete(
+      const response = await axiosInstance.delete(
         `https://fms-1-drlz.onrender.com/api/v1/flocks`
       );
       console.log(response.data.data);

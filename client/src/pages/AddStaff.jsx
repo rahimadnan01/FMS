@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-import axios from "axios";
+import axiosInstance from "../utils/axiosInstance";
 import "../components/Auth/RegisterForm.css";
 import ErrorMessage from "../components/UI/ErrorMessage";
 import "./AddStaff.css";
@@ -37,7 +37,7 @@ function AddStaff() {
   const onSubmit = async (data) => {
     try {
       setLoading(true);
-      const response = await axios.post(
+      const response = await axiosInstance.post(
         "https://fms-1-drlz.onrender.com/api/v1/staff/register",
         data,
         { withCredentials: true }

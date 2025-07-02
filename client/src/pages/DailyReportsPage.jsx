@@ -1,6 +1,6 @@
 import { NavLink, useNavigate, useParams } from "react-router-dom";
 import Navbar from "../layouts/Navbar";
-import axios from "axios";
+import axiosInstance from "../utils/axiosInstance";
 import { Button } from "@mui/material";
 import NoDataFound from "../components/UI/NoDataFound";
 import useFetch from "../hooks/useFetch";
@@ -32,7 +32,7 @@ function DailyReportsPage() {
   const handleDeleteReport = async (dailyReportId) => {
     try {
       console.log(dailyReportId);
-      const response = await axios.delete(
+      const response = await axiosInstance.delete(
         `https://fms-1-drlz.onrender.com/api/v1/flocks/${id}/dailyReport/${dailyReportId}`
       );
       console.log(response.data.data);
@@ -44,7 +44,7 @@ function DailyReportsPage() {
 
   const handleDeleteAllReports = async () => {
     try {
-      const response = await axios.delete(
+      const response = await axiosInstance.delete(
         `https://fms-1-drlz.onrender.com/api/v1/flocks/${id}/dailyReports/deleteAll`
       );
       console.log(response.data.data);
@@ -150,7 +150,6 @@ function DailyReportsPage() {
               Add Daily Report
             </Button>
           </NavLink>
-         
         </div>
       </div>
     </div>

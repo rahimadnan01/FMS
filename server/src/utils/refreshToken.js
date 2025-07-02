@@ -27,7 +27,7 @@ const refreshToken = wrapAsync(async (req, res) => {
   }
 
   if (user && user.refreshToken !== upcomingRefreshToken) {
-    throw new ApiError(400, "User is unathorized");
+    throw new ApiError(400, "User is unauthorized");
   }
 
   let { accessToken, refreshToken: newRefreshToken } =

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
+import axiosInstance from "../utils/axiosInstance";
 
 const useFetch = (url) => {
   const [data, setData] = useState(null);
@@ -9,23 +9,21 @@ const useFetch = (url) => {
   useEffect(() => {
     if (!url) return;
     setData(null);
-    console.log("useFetch: fetching url:", url); // Debug log
     const controller = new AbortController();
 
     const fetchData = async () => {
       setLoading(true);
       try {
-        const response = await axios.get(url, {
+        const response = await axiosInstance.get(url, {
           signal: controller.signal,
         });
         if (response.status >= 200 && response.status <= 300) {
-          console.log("useFetch: response data:", response.data.data); // Debug log
           setData(response.data.data);
           setError(null);
         }
       } catch (error) {
-        if (axios.isCancel(error)) {
-          console.log("request cancelled", error.message);
+        if (error.name === "CanceledError") {
+          // request cancelled
         } else {
           setError(error.message || "Something went Wrong");
         }
@@ -36,7 +34,6 @@ const useFetch = (url) => {
 
     fetchData();
 
-    // cleanup function
     return () => {
       controller.abort();
     };

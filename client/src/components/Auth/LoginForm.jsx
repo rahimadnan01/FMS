@@ -6,7 +6,7 @@ import ErrorMessage from "../UI/ErrorMessage.jsx";
 import Button from "@mui/material/Button";
 import "./LoginForm.css";
 import TextField from "@mui/material/TextField";
-import axios from "axios";
+import axiosInstance from "../utils/axiosInstance";
 import { useState } from "react";
 function LoginForm({ userRole }) {
   const { login } = useAuth();
@@ -37,7 +37,7 @@ function LoginForm({ userRole }) {
   const onSubmit = async (data) => {
     setLoading(true);
     try {
-      const response = await axios.post(
+      const response = await axiosInstance.post(
         `https://fms-1-drlz.onrender.com/api/v1/${userRole}/login`,
         data,
         { withCredentials: true }
