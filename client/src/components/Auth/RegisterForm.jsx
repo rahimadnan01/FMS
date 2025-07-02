@@ -5,7 +5,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
 import "./RegisterForm.css";
 import TextField from "@mui/material/TextField";
-import axiosInstance from "../utils/axiosInstance";
+import axiosInstance from "../../utils/axiosInstance.js";
 import ErrorMessage from "../UI/ErrorMessage";
 function RegisterForm({ userRole }) {
   const {
