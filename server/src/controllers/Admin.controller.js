@@ -99,35 +99,20 @@ const loginAdmin = wrapAsync(async (req, res) => {
 });
 const logoutAdmin = wrapAsync(async (req, res) => {
   const user = req.user;
-  console.log(user);
-  if (!user) {
-    throw new ApiError(404, "User not found");
+  if (user && user._id) {
+    await User.findByIdAndUpdate(
+      user._id,
+      { $unset: { refreshToken: 1 } },
+      { new: true }
+    );
   }
-  const loggedOutUser = await User.findByIdAndUpdate(
-    user._id,
-    {
-      $unset: {
-        refreshToken: 1,
-      },
-    },
-    {
-      new: true,
-    }
-  );
-  if (!loggedOutUser) {
-    throw new ApiError(500, "Failed to logout User");
-  }
-  let options = {
-    httpOnly: true,
-    secure: true,
-  };
+  // Always clear cookies, even if user not found
+  let options = { httpOnly: true, secure: true };
   res
     .status(200)
     .clearCookie("refreshToken", options)
     .clearCookie("accessToken", options)
-    .json(
-      new ApiResponse(200, "User logged out successfully", { loggedOutUser })
-    );
+    .json(new ApiResponse(200, "User logged out successfully"));
 });
 
 export { registerAdmin, loginAdmin, logoutAdmin };
