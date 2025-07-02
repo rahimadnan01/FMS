@@ -11,28 +11,36 @@ const verifyJwt = (role) =>
         req.cookies.accessToken ||
         req.header("Authorization")?.replace("Bearer", "");
       if (!tokens) {
-        throw new ApiError(401, "User is unauthorized");
+        return next(new ApiError(401, "User is unauthorized"));
       }
       const decodedToken = jwt.verify(tokens, process.env.ACCESS_TOKEN_KEY);
       if (!decodedToken._id) {
-        throw new ApiError(
-          500,
-          "Something went wrong while Decoding the tokens"
+        return next(
+          new ApiError(500, "Something went wrong while Decoding the tokens")
         );
       }
 
       const user = await User.findById(decodedToken._id).select(" -password");
       if (!user) {
-        throw new ApiError(500, "Failed to find the User");
+        return next(new ApiError(500, "Failed to find the User"));
       }
       if (role && user.role !== role) {
-        throw new ApiError(403, `Access Denied to the ${role}`);
+        return next(new ApiError(403, `Access Denied to the ${role}`));
       }
 
       req.user = user;
       next();
     } catch (error) {
-      throw new ApiError(error.statusCode, error.message);
+      // Handle JWT expiration and missing token as 401
+      if (
+        error.name === "TokenExpiredError" ||
+        error.name === "JsonWebTokenError" ||
+        error.message === "User is unauthorized"
+      ) {
+        return next(new ApiError(401, "User is unauthorized or token expired"));
+      }
+      // Other errors
+      return next(new ApiError(500, error.message || "Authentication failed"));
     }
   });
 
