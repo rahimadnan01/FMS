@@ -19,7 +19,9 @@ axiosInstance.interceptors.response.use(
       originalRequest._retry = true;
       try {
         // Attempt to refresh token
-        await axiosInstance.post("/api/v1/refreshToken");
+        await axiosInstance.post(
+          "https://fms-1-drlz.onrender.com/api/v1/refreshToken"
+        );
         // Retry the original request
         return axiosInstance(originalRequest);
       } catch (refreshError) {
