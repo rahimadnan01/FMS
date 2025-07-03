@@ -46,10 +46,18 @@
 }
 
 @media (max-width: 575.98px) {
+  .daily-reports-col-main {
+    width: 100%;
+  }
   .daily-report-col {
     height: 95%;
     flex-direction: column;
     align-items: center;
+    padding-bottom: 1rem;
+  }
+
+  .daily-reports-main {
+    height: auto;
   }
 
   .report-date h3 {
@@ -58,5 +66,8 @@
 
   .page-end-btns {
     width: 90%;
+  }
+  .flock-col-del {
+    margin-bottom: 0.5rem;
   }
 }
