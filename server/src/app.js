@@ -6,11 +6,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: [
-      "http://localhost:5173",
-      "https://fms-gdb9.vercel.app",
-      "https://fms-gdb9-hafiz-rahims-projects.vercel.app",
-    ],
+    origin: ["http://localhost:5173", "https://fms-eight-omega.vercel.app"],
     credentials: true,
   })
 );
