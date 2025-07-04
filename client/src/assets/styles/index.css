@@ -20,3 +20,13 @@ html body {
   margin: 0;
   font-family: "Roboto", sans-serif !important;
 }
+
+.main-content {
+  padding-top: 64px;
+}
+
+@media (max-width: 900px) {
+  .main-content {
+    padding-top: 48px;
+  }
+}

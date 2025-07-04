@@ -69,7 +69,7 @@ function HomePage() {
           <DataBox
             iconName="chart-line"
             label="Total Production"
-            value={stats.totalProduction}
+            value={Math.floor(stats.totalProduction)}
           />
           <DataBox iconName="box" label="Total Feed" value={stats.totalFeed} />
           <DataBox
