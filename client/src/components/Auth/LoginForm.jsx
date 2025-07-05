@@ -117,11 +117,7 @@ function LoginForm({ userRole }) {
               <span className="error-text">{errors.password.message}</span>
             )}
           </div>
-          <div className="register-link">
-            <li className="login-link">
-              <NavLink to="/register">Do not have an account? Signup</NavLink>
-            </li>
-          </div>
+
           <div>
             <Button variant="contained" disabled={isSubmitting} type="submit">
               {isSubmitting ? "Submitting..." : "Submit"}
