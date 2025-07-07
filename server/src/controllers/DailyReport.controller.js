@@ -9,15 +9,29 @@ import { deleteModel } from "mongoose";
 const addDailyReport = wrapAsync(async (req, res) => {
   const { id } = req.params;
   // getting fields from user
-  const { mortality, feedConsumed, eggsCollected } = req.body;
-  if (!mortality || !feedConsumed || !eggsCollected) {
-    throw new ApiError("Al fields are required");
+  const {
+    mortality,
+    feedConsumed,
+    eggsCollected,
+    waterIntake,
+    minTemp,
+    maxTemp,
+  } = req.body;
+  if (
+    !mortality ||
+    !feedConsumed ||
+    !eggsCollected ||
+    !waterIntake ||
+    !minTemp ||
+    !maxTemp
+  ) {
+    throw new ApiError(401, "All fields are required");
   }
   if (!id) {
     throw new ApiError(401, "Id is required");
   }
 
-  // finding fock
+  // finding flock
   const flock = await Flock.findById(id);
   if (!flock) {
     throw new ApiError(404, "Flock not found of this Id");
@@ -29,6 +43,9 @@ const addDailyReport = wrapAsync(async (req, res) => {
     mortality: mortality,
     feedConsumed: feedConsumed,
     eggsCollected: eggsCollected,
+    waterIntake: waterIntake,
+    minTemp: minTemp,
+    maxTemp: maxTemp,
   });
 
   const createdDailyReport = await DailyReport.findById(dailyReport._id);
@@ -62,7 +79,7 @@ const addDailyReport = wrapAsync(async (req, res) => {
 
   // updating flock mortality
   const totalMortality = dailyReportMortality[0]?.total || 0;
-  if (totalMortality) flock.mortality = totalMortality;
+  flock.mortality = totalMortality;
 
   // finding totalProduction from DR
   const dailyReportProduction = await DailyReport.aggregate([
@@ -70,9 +87,20 @@ const addDailyReport = wrapAsync(async (req, res) => {
     { $group: { _id: null, total: { $sum: "$eggsCollected" } } },
   ]);
 
-  // updaitng the flock production in flock
+  // updating the flock production in flock
   const totalProduction = dailyReportProduction[0]?.total;
   if (totalProduction) flock.totalProduction = totalProduction;
+
+  // finding the water Intake from the daily reports
+  const dailyReportWaterIntake = await DailyReport.aggregate([
+    { $match: { flock: flock._id } },
+    { $group: { _id: null, total: { $sum: "$waterIntake" } } },
+  ]);
+
+  // updating the water Intake in the flock
+  const totalWaterIntake = dailyReportWaterIntake[0]?.total || 0;
+  console.log("totalWaterIntake", totalWaterIntake);
+  flock.waterIntake = totalWaterIntake;
 
   const updatedFlock = await flock.save();
   if (!updatedFlock) {
@@ -92,7 +120,14 @@ const updateDailyReport = wrapAsync(async (req, res) => {
   if (!flockId || !dailyReportId) {
     throw new ApiError(404, "Flock Id and daily repoty Id is not found");
   }
-  const { mortality, eggsCollected, feedConsumed } = req.body;
+  const {
+    mortality,
+    eggsCollected,
+    feedConsumed,
+    waterIntake,
+    minTemp,
+    maxTemp,
+  } = req.body;
 
   const dailyReport = await DailyReport.findById(dailyReportId);
   if (!dailyReport) {
@@ -101,12 +136,15 @@ const updateDailyReport = wrapAsync(async (req, res) => {
   if (mortality) dailyReport.mortality = mortality;
   if (eggsCollected) dailyReport.eggsCollected = eggsCollected;
   if (feedConsumed) dailyReport.feedConsumed = feedConsumed;
+  if (waterIntake) dailyReport.waterIntake = waterIntake;
+  if (minTemp) dailyReport.minTemp = minTemp;
+  if (maxTemp) dailyReport.maxTemp = maxTemp;
 
   const updatedDailyReport = await dailyReport.save();
   if (!updatedDailyReport) {
     throw new ApiError(500, "Failed to update Daily report");
   }
-  // finding fock
+  // finding flock
   const flock = await Flock.findById(flockId);
   if (!flock) {
     throw new ApiError(404, "Flock not found of this Id");
@@ -138,7 +176,7 @@ const updateDailyReport = wrapAsync(async (req, res) => {
 
   // updating flock mortality
   const totalMortality = dailyReportMortality[0]?.total || 0;
-  if (totalMortality) flock.mortality = totalMortality;
+  flock.mortality = totalMortality;
 
   // finding totalProduction from DR
   const dailyReportProduction = await DailyReport.aggregate([
@@ -146,9 +184,19 @@ const updateDailyReport = wrapAsync(async (req, res) => {
     { $group: { _id: null, total: { $sum: "$eggsCollected" } } },
   ]);
 
-  // updaitng the flock production in flock
+  // updating the flock production in flock
   const totalProduction = dailyReportProduction[0]?.total;
   if (totalProduction) flock.totalProduction = totalProduction;
+
+  // finding waterIntake from DR
+  const DailyWaterIntake = await DailyReport.aggregate([
+    { $match: { flock: flock._id } },
+    { $group: { _id: null, total: { $sum: "$waterIntake" } } },
+  ]);
+
+  // updating the flock water Intake in flock
+  const totalWaterIntake = DailyWaterIntake[0]?.total;
+  if (totalWaterIntake) flock.waterIntake = totalWaterIntake;
 
   const updatedFlock = await flock.save();
   if (!updatedFlock) {
@@ -210,7 +258,7 @@ const deleteOneReport = wrapAsync(async (req, res) => {
 
   // updating flock mortality
   const totalMortality = dailyReportMortality[0]?.total || 0;
-  if (totalMortality) flock.mortality = totalMortality;
+  flock.mortality = totalMortality;
 
   // finding totalProduction from DR
   const dailyReportProduction = await DailyReport.aggregate([
@@ -220,7 +268,17 @@ const deleteOneReport = wrapAsync(async (req, res) => {
 
   // updaitng the flock production in flock
   const totalProduction = dailyReportProduction[0]?.total;
-  if (totalProduction) flock.totalProduction = totalProduction;
+  flock.totalProduction = totalProduction;
+
+  // finding waterIntake from DR
+  const DailyWaterIntake = await DailyReport.aggregate([
+    { $match: { flock: flock._id } },
+    { $group: { _id: null, total: { $sum: "$waterIntake" } } },
+  ]);
+
+  // updating the flock water Intake in flock
+  const totalWaterIntake = DailyWaterIntake[0]?.total || 0;
+  flock.waterIntake = totalWaterIntake;
 
   const updatedFlock = await flock.save();
   if (!updatedFlock) {

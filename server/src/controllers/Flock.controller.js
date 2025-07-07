@@ -55,6 +55,7 @@ const updateFlock = wrapAsync(async (req, res) => {
     totalProduction,
     totalFeedStock,
     feedConsumed,
+    waterIntake,
   } = req.body;
 
   const flock = await Flock.findById(id);
@@ -66,6 +67,7 @@ const updateFlock = wrapAsync(async (req, res) => {
   if (totalBirds) flock.totalBirds = totalBirds;
   if (mortality) flock.mortality = mortality;
   if (totalProduction) flock.totalProduction = totalProduction;
+  if (waterIntake) flock.waterIntake = waterIntake;
   const updatedFlock = await flock.save();
   if (!updatedFlock) {
     throw new ApiError(500, "Failed to update flock");

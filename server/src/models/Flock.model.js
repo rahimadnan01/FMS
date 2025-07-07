@@ -26,6 +26,9 @@ const flockSchema = new mongoose.Schema(
     percentProduction: {
       type: Number,
     },
+    waterIntake: {
+      type: Number,
+    },
     createdAt: {
       type: Date,
       default: Date.now,
