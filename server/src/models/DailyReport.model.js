@@ -23,6 +23,7 @@ const dailyReportSchema = new mongoose.Schema(
     },
     waterIntake: {
       type: Number,
+      default: 0,
     },
     minTemp: {
       type: Number,
