@@ -30,13 +30,18 @@ const addMonthlyReport = wrapAsync(async (req, res) => {
         totalMortality: { $sum: "$mortality" },
         totalFeedConsumed: { $sum: "$feedConsumed" },
         totalEggsCollected: { $sum: "$eggsCollected" },
+        totalWaterIntake: { $sum: "$waterIntake" },
       },
     },
   ]);
   let monthlyReport;
   if (monthlyData.length > 0) {
-    const { totalEggsCollected, totalMortality, totalFeedConsumed } =
-      monthlyData[0];
+    const {
+      totalEggsCollected,
+      totalMortality,
+      totalFeedConsumed,
+      totalWaterIntake,
+    } = monthlyData[0];
     monthlyReport = await MonthlyReport.findOneAndUpdate(
       {
         flock: flock._id,
@@ -47,6 +52,7 @@ const addMonthlyReport = wrapAsync(async (req, res) => {
         totalMortality: totalMortality,
         totalEggsCollected: totalEggsCollected,
         totalFeedConsumed: totalFeedConsumed,
+        totalWaterIntake: totalWaterIntake,
       },
       {
         upsert: true,

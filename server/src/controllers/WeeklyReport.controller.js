@@ -32,14 +32,19 @@ const addWeeklyReport = wrapAsync(async (req, res) => {
         totalMortality: { $sum: "$mortality" },
         totalEggsCollected: { $sum: "$eggsCollected" },
         totalFeedConsumed: { $sum: "$feedConsumed" },
+        totalWaterIntake: { $sum: "$waterIntake" },
       },
     },
   ]);
   console.log(weeklyData);
   let weeklyReport;
   if (weeklyData.length > 0) {
-    const { totalMortality, totalFeedConsumed, totalEggsCollected } =
-      weeklyData[0];
+    const {
+      totalMortality,
+      totalFeedConsumed,
+      totalEggsCollected,
+      totalWaterIntake,
+    } = weeklyData[0];
     weeklyReport = await WeeklyReport.findOneAndUpdate(
       {
         flock: flockId,
@@ -50,6 +55,7 @@ const addWeeklyReport = wrapAsync(async (req, res) => {
         totalMortality,
         totalEggsCollected,
         totalFeedConsumed,
+        totalWaterIntake,
       },
       {
         upsert: true,
