@@ -110,6 +110,54 @@ function AddDailyReport() {
                     )}
                   </div>
                 </div>
+                <div className="text-field-update">
+                  <div className="field-with-error">
+                    <TextField
+                      id="outlined-basic"
+                      label="Water Intake"
+                      autoComplete="off"
+                      variant="outlined"
+                      {...register("waterIntake", { required: true })}
+                    />
+                    {errors.waterIntake && (
+                      <span className="error-text">
+                        Water Intake is required
+                      </span>
+                    )}
+                  </div>
+                </div>
+                <div className="text-field-update">
+                  <div className="field-with-error">
+                    <TextField
+                      id="outlined-basic"
+                      label="Min Temperature"
+                      autoComplete="off"
+                      variant="outlined"
+                      {...register("minTemp", { required: true })}
+                    />
+                    {errors.minTemp && (
+                      <span className="error-text">
+                        Min Temperature is required
+                      </span>
+                    )}
+                  </div>
+                </div>
+                <div className="text-field-update">
+                  <div className="field-with-error">
+                    <TextField
+                      id="outlined-basic"
+                      label="Max Temperature"
+                      autoComplete="off"
+                      variant="outlined"
+                      {...register("maxTemp", { required: true })}
+                    />
+                    {errors.maxTemp && (
+                      <span className="error-text">
+                        Max Temperature is required
+                      </span>
+                    )}
+                  </div>
+                </div>
               </div>
               <div className="update-form-btn">
                 <Button

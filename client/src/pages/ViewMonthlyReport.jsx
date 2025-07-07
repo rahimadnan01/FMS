@@ -1,5 +1,6 @@
 import { NavLink, useParams } from "react-router-dom";
 import Navbar from "../layouts/Navbar";
+import { jsPDF } from "jspdf";
 import LoadingSpinner from "../components/UI/LoadingSpinner";
 import ErrorMessage from "../components/UI/ErrorMessage";
 import useFetch from "../hooks/useFetch";
@@ -32,6 +33,23 @@ function ViewMonthlyReport() {
   const { data, error, loading } = useFetch(
     `https://fms-1-drlz.onrender.com/api/v1/flocks/${id}/monthlyReports/${monthlyReportId}`
   );
+
+  const generatePdf = () => {
+    if (!data) return;
+    const doc = new jsPDF();
+
+    doc.setFontSize(18);
+    doc.text(`${monthNames[data.month - 1]}-${data.year} Report`, 20, 20);
+
+    doc.setFontSize(12);
+    doc.text(`Mortality: ${data.totalMortality}`, 20, 40);
+    doc.text(`Feed Consumed: ${data.totalFeedConsumed}`, 20, 50);
+    doc.text(`Eggs Collected: ${data.totalEggsCollected}`, 20, 60);
+    doc.text(`Water Intake: ${data.totalWaterIntake || 0}`, 20, 70);
+
+    doc.save(`${monthNames[data.month - 1]}-${data.year}.pdf`);
+  };
+
   if (loading)
     return (
       <div className="loader-overlay">
@@ -70,6 +88,11 @@ function ViewMonthlyReport() {
                 label={`Eggs Collected: ${data.totalEggsCollected}`}
                 variant="outlined"
               />
+              <Chip
+                className="flock-badge"
+                label={`Water Intake: ${data.totalWaterIntake}`}
+                variant="outlined"
+              />
             </div>
 
             <div className="flock-info">
@@ -88,6 +111,9 @@ function ViewMonthlyReport() {
               Back
             </Button>
           </NavLink>
+          <Button variant="contained" color="success" onClick={generatePdf}>
+            Download Report
+          </Button>
         </div>
       </div>
     </>

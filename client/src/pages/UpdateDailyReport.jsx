@@ -47,6 +47,7 @@ function UpdateDailyReport() {
   let { data, loading, error } = useFetch(
     `https://fms-1-drlz.onrender.com/api/v1/flocks/${id}/dailyReport/${dailyReportId}`
   );
+  if (data) console.log(data);
   if (loading || updateLoading)
     return (
       <div className="loader-overlay">
@@ -116,6 +117,56 @@ function UpdateDailyReport() {
                   {errors.totalBirds && (
                     <span className="error-text">
                       Feed Consumed is required
+                    </span>
+                  )}
+                </div>
+              </div>
+
+              <div className="text-field-update">
+                <div className="field-with-error">
+                  <TextField
+                    id="outlined-basic"
+                    label="Water Intake"
+                    autoComplete="off"
+                    variant="outlined"
+                    defaultValue={data.waterIntake || 0}
+                    {...register("waterIntake", { required: true })}
+                  />
+                  {errors.waterIntake && (
+                    <span className="error-text">Water Intake is required</span>
+                  )}
+                </div>
+              </div>
+              <div className="text-field-update">
+                <div className="field-with-error">
+                  <TextField
+                    id="outlined-basic"
+                    label="Min Temperature"
+                    autoComplete="off"
+                    variant="outlined"
+                    defaultValue={data.minTemp || 0}
+                    {...register("minTemp", { required: true })}
+                  />
+                  {errors.minTemp && (
+                    <span className="error-text">
+                      Min Temperature is required
+                    </span>
+                  )}
+                </div>
+              </div>
+              <div className="text-field-update">
+                <div className="field-with-error">
+                  <TextField
+                    id="outlined-basic"
+                    label="Max Temperature"
+                    autoComplete="off"
+                    variant="outlined"
+                    defaultValue={data.maxTemp || 0}
+                    {...register("maxTemp", { required: true })}
+                  />
+                  {errors.maxTemp && (
+                    <span className="error-text">
+                      Max Temperature is required
                     </span>
                   )}
                 </div>

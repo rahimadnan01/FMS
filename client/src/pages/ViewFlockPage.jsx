@@ -1,4 +1,5 @@
 import { NavLink, useParams } from "react-router-dom";
+import { jsPDF } from "jspdf";
 import Navbar from "../layouts/Navbar";
 import "../pages/ViewFlockPage.css";
 import useFetch from "../hooks/useFetch";
@@ -32,6 +33,34 @@ function ViewFlockPage() {
   const { data, error, loading } = useFetch(
     `https://fms-1-drlz.onrender.com/api/v1/flocks/${id}`
   );
+
+  const generatePdf = () => {
+    if (!data) return;
+    const doc = new jsPDF();
+
+    doc.setFontSize(18);
+    doc.text(`${data.flock.name} Report`, 20, 20);
+
+    doc.setFontSize(12);
+    doc.text(`Name:${data.flock.name}`, 20, 40);
+    doc.text(`Breed: ${data.flock.breed}`, 20, 50);
+    doc.text(`Quantity: ${data.flock.totalBirds}`, 20, 60);
+    doc.text(`Mortality: ${data.flock.mortality || 0}`, 20, 70);
+    doc.text(`Production %: ${data.flock.percentProduction || 0}`, 20, 80);
+    doc.text(`Remaining Birds: ${data.flock.remainingBirds || 0}`, 20, 90);
+    doc.text(`Total Production: ${data.flock.totalProduction || 0}`, 20, 100);
+    doc.text(
+      `Total Feed Stock: ${data.feedStock.totalFeedStock || 0}`,
+      20,
+      110
+    );
+    doc.text(`Feed Consumed: ${data.feedStock.feedConsumed || 0}`, 20, 120);
+    doc.text(`Remaining Feed: ${data.feedStock.remainingFeed || 0}`, 20, 130);
+    doc.text(`Water Intake: ${data.flock.waterIntake || 0}`, 20, 140);
+
+    doc.save(`${data.flock.name}-report.pdf`);
+  };
+
   if (loading)
     return (
       <div className="loader-overlay">
@@ -108,6 +137,11 @@ function ViewFlockPage() {
                 label={`Remaining Feed: ${data.feedStock.remainingFeed || 0}`}
                 variant="outlined"
               />
+              <Chip
+                className="flock-badge"
+                label={`Water Intake: ${data.flock.waterIntake || 0}`}
+                variant="outlined"
+              />
             </div>
 
             <div className="flock-info">
@@ -124,6 +158,9 @@ function ViewFlockPage() {
               </Button>
             </NavLink>
           ))}
+          <Button variant="contained" color="success" onClick={generatePdf}>
+            Download Flock Report
+          </Button>
         </div>
       </div>
     </>

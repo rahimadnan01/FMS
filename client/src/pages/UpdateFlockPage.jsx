@@ -177,6 +177,22 @@ function UpdateFlockPage() {
                   )}
                 </div>
               </div>
+
+              <div className="text-field-update">
+                <div className="field-with-error">
+                  <TextField
+                    id="outlined-basic"
+                    label="Water Intake"
+                    autoComplete="off"
+                    variant="outlined"
+                    defaultValue={data.flock.waterIntake || 0}
+                    {...register("waterIntake", { required: true })}
+                  />
+                  {errors.waterIntake && (
+                    <span className="error-text">Water Intake is required</span>
+                  )}
+                </div>
+              </div>
             </div>
             <div className="update-form-btn">
               <Button variant="contained" disabled={isSubmitting} type="submit">
