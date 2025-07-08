@@ -35,6 +35,7 @@ function ViewDailyReport() {
     doc.text(`Water Intake: ${data.waterIntake || 0}`, 20, 70);
     doc.text(`Min Temp: ${data.minTemp}`, 20, 80);
     doc.text(`Max Temp: ${data.maxTemp}`, 20, 90);
+    doc.text(`Medicine: ${data.medicine}`, 20, 100);
 
     doc.save(`${formatDate(data.Date)}.pdf`);
   };
@@ -89,6 +90,11 @@ function ViewDailyReport() {
               <Chip
                 className="flock-badge"
                 label={`Max Temp: ${data.maxTemp}`}
+                variant="outlined"
+              />
+              <Chip
+                className="flock-badge"
+                label={`Medicine: ${data.medicine || "Not added"}`}
                 variant="outlined"
               />
             </div>

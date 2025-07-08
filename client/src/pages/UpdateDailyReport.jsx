@@ -171,6 +171,21 @@ function UpdateDailyReport() {
                   )}
                 </div>
               </div>
+              <div className="text-field-update">
+                <div className="field-with-error">
+                  <TextField
+                    id="outlined-basic"
+                    label="Medicine"
+                    autoComplete="off"
+                    variant="outlined"
+                    defaultValue={data.medicine || ""}
+                    {...register("medicine", { required: true })}
+                  />
+                  {errors.medicine && (
+                    <span className="error-text">Medicine is required</span>
+                  )}
+                </div>
+              </div>
             </div>
             <div className="update-form-btn">
               <Button variant="contained" disabled={isSubmitting} type="submit">
