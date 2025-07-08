@@ -16,6 +16,7 @@ const addDailyReport = wrapAsync(async (req, res) => {
     waterIntake,
     minTemp,
     maxTemp,
+    medicine,
   } = req.body;
   if (
     !mortality ||
@@ -23,7 +24,8 @@ const addDailyReport = wrapAsync(async (req, res) => {
     !eggsCollected ||
     !waterIntake ||
     !minTemp ||
-    !maxTemp
+    !maxTemp ||
+    !medicine
   ) {
     throw new ApiError(401, "All fields are required");
   }
@@ -46,6 +48,7 @@ const addDailyReport = wrapAsync(async (req, res) => {
     waterIntake: waterIntake,
     minTemp: minTemp,
     maxTemp: maxTemp,
+    medicine: medicine,
   });
 
   const createdDailyReport = await DailyReport.findById(dailyReport._id);
@@ -127,6 +130,7 @@ const updateDailyReport = wrapAsync(async (req, res) => {
     waterIntake,
     minTemp,
     maxTemp,
+    medicine,
   } = req.body;
 
   const dailyReport = await DailyReport.findById(dailyReportId);
@@ -139,7 +143,7 @@ const updateDailyReport = wrapAsync(async (req, res) => {
   if (waterIntake) dailyReport.waterIntake = waterIntake;
   if (minTemp) dailyReport.minTemp = minTemp;
   if (maxTemp) dailyReport.maxTemp = maxTemp;
-
+  if (medicine) dailyReport.medicine = medicine;
   const updatedDailyReport = await dailyReport.save();
   if (!updatedDailyReport) {
     throw new ApiError(500, "Failed to update Daily report");
