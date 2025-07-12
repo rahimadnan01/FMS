@@ -21,6 +21,10 @@ function ViewDailyReport() {
     `https://fms-1-drlz.onrender.com/api/v1/flocks/${id}/dailyReport/${dailyReportId}`
   );
 
+  let { data: flockData } = useFetch(
+    `https://fms-1-drlz.onrender.com/api/v1/flocks/${id}`
+  );
+
   const generatePdf = () => {
     if (!data) return;
     const doc = new jsPDF();
@@ -29,13 +33,28 @@ function ViewDailyReport() {
     doc.text(`${formatDate(data.Date)} daily Report`, 20, 20);
 
     doc.setFontSize(12);
-    doc.text(`Mortality: ${data.mortality}`, 20, 40);
-    doc.text(`Feed Consumed: ${data.feedConsumed}`, 20, 50);
-    doc.text(`Eggs Collected: ${data.eggsCollected}`, 20, 60);
-    doc.text(`Water Intake: ${data.waterIntake || 0}`, 20, 70);
-    doc.text(`Min Temp: ${data.minTemp}`, 20, 80);
-    doc.text(`Max Temp: ${data.maxTemp}`, 20, 90);
-    doc.text(`Medicine: ${data.medicine}`, 20, 100);
+    doc.text(`Flock Name: ${flockData?.flock?.name}`, 20, 40);
+    doc.text(`Breed Name: ${flockData?.flock?.breed}`, 20, 50);
+    doc.text(`Total Quantity : ${flockData?.flock?.totalBirds || 0}`, 20, 60);
+    doc.text(
+      `Remaining Birds : ${flockData?.flock?.remainingBirds || 0}`,
+      20,
+      70
+    );
+    doc.text(
+      `% Production :${Math.ceil(
+        (data?.eggsCollected / flockData?.flock?.remainingBirds) * 100 || 0
+      )} `,
+      20,
+      80
+    );
+    doc.text(`Mortality: ${data.mortality || 0}`, 20, 90);
+    doc.text(`Feed Consumed: ${data.feedConsumed}`, 20, 100);
+    doc.text(`Eggs Collected: ${data.eggsCollected}`, 20, 110);
+    doc.text(`Water Intake: ${data.waterIntake || 0}`, 20, 120);
+    doc.text(`Min Temp: ${data.minTemp}`, 20, 130);
+    doc.text(`Max Temp: ${data.maxTemp}`, 20, 140);
+    doc.text(`Medicine: ${data.medicine}`, 20, 150);
 
     doc.save(`${formatDate(data.Date)}.pdf`);
   };
@@ -62,6 +81,36 @@ function ViewDailyReport() {
         <Card className="flock-card">
           <CardContent className="flock-content">
             <div className="flock-badges">
+              <Chip
+                className="flock-badge"
+                label={`Flock Name: ${flockData?.flock?.name}`}
+                variant="outlined"
+              />
+              <Chip
+                className="flock-badge"
+                label={`Breed Name: ${flockData?.flock?.breed}`}
+                variant="outlined"
+              />
+              <Chip
+                className="flock-badge"
+                label={`Total Quantity : ${flockData?.flock?.totalBirds || 0}`}
+                variant="outlined"
+              />
+              <Chip
+                className="flock-badge"
+                label={`Remaining Birds : ${
+                  flockData?.flock?.remainingBirds || 0
+                }`}
+                variant="outlined"
+              />
+              <Chip
+                className="flock-badge"
+                label={`% Production :${Math.ceil(
+                  (data?.eggsCollected / flockData?.flock?.remainingBirds) *
+                    100 || 0
+                )} `}
+                variant="outlined"
+              />
               <Chip
                 className="flock-badge"
                 label={`Mortality: ${data.mortality}`}

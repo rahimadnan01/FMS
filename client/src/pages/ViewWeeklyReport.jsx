@@ -17,6 +17,10 @@ function ViewWeeklyReport() {
     `https://fms-1-drlz.onrender.com/api/v1/flocks/${id}/weeklyReport/${weeklyReportId}`
   );
 
+  let { data: flockData } = useFetch(
+    `https://fms-1-drlz.onrender.com/api/v1/flocks/${id}`
+  );
+
   const generatePdf = () => {
     if (!data) return;
     const doc = new jsPDF();
@@ -31,10 +35,12 @@ function ViewWeeklyReport() {
     );
 
     doc.setFontSize(12);
-    doc.text(`Mortality: ${data.totalMortality}`, 20, 40);
-    doc.text(`Feed Consumed: ${data.totalFeedConsumed}`, 20, 50);
-    doc.text(`Eggs Collected: ${data.totalEggsCollected}`, 20, 60);
-    doc.text(`Water Intake: ${data.totalWaterIntake || 0}`, 20, 70);
+    doc.text(`Flock Name: ${flockData?.flock?.name}`, 20, 40);
+    doc.text(`Breed Name: ${flockData?.flock?.breed}`, 20, 50);
+    doc.text(`Mortality: ${data.totalMortality}`, 20, 60);
+    doc.text(`Feed Consumed: ${data.totalFeedConsumed}`, 20, 70);
+    doc.text(`Eggs Collected: ${data.totalEggsCollected}`, 20, 80);
+    doc.text(`Water Intake: ${data.totalWaterIntake || 0}`, 20, 90);
 
     doc.save(
       `${formatDate(data.weekStartDate)}-${formatDate(data.weekEndDate)}.pdf`
@@ -71,6 +77,16 @@ function ViewWeeklyReport() {
         <Card className="flock-card">
           <CardContent className="flock-content">
             <div className="flock-badges">
+              <Chip
+                className="flock-badge"
+                label={`Flock Name: ${flockData?.flock?.name}`}
+                variant="outlined"
+              />
+              <Chip
+                className="flock-badge"
+                label={`Breed Name: ${flockData?.flock?.breed}`}
+                variant="outlined"
+              />
               <Chip
                 className="flock-badge"
                 label={`Mortality: ${data.totalMortality}`}
