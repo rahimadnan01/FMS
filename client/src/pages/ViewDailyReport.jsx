@@ -55,6 +55,13 @@ function ViewDailyReport() {
     doc.text(`Min Temp: ${data.minTemp}`, 20, 130);
     doc.text(`Max Temp: ${data.maxTemp}`, 20, 140);
     doc.text(`Medicine: ${data.medicine}`, 20, 150);
+    doc.text(
+      `Feed Per Bird: ${Math.floor(
+        (data?.feedConsumed * 50 * 1000) / flockData?.flock?.remainingBirds
+      )}`,
+      20,
+      160
+    );
 
     doc.save(`${formatDate(data.Date)}.pdf`);
   };
@@ -114,6 +121,14 @@ function ViewDailyReport() {
               <Chip
                 className="flock-badge"
                 label={`Mortality: ${data.mortality}`}
+                variant="outlined"
+              />
+              <Chip
+                className="flock-badge"
+                label={`Feed Per Bird: ${Math.floor(
+                  (data?.feedConsumed * 50 * 1000) /
+                    flockData?.flock?.remainingBirds
+                )}`}
                 variant="outlined"
               />
               <Chip
