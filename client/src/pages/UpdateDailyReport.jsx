@@ -186,6 +186,38 @@ function UpdateDailyReport() {
                   )}
                 </div>
               </div>
+              <div className="text-field-update">
+                <div className="field-with-error">
+                  <TextField
+                    id="outlined-basic"
+                    label=" Egg Weight"
+                    autoComplete="off"
+                    variant="outlined"
+                    defaultValue={data.eggWeight || 0}
+                    {...register("eggWeight", { required: true })}
+                  />
+                  {errors.eggWeight && (
+                    <span className="error-text">
+                      Weight of Bird is required
+                    </span>
+                  )}
+                </div>
+              </div>
+              <div className="text-field-update">
+                <div className="field-with-error">
+                  <TextField
+                    id="outlined-basic"
+                    label=" Bird Age"
+                    autoComplete="off"
+                    variant="outlined"
+                    defaultValue={data.birdAge || 0}
+                    {...register("birdAge", { required: true })}
+                  />
+                  {errors.birdAge && (
+                    <span className="error-text">Bird Age is required</span>
+                  )}
+                </div>
+              </div>
             </div>
             <div className="update-form-btn">
               <Button variant="contained" disabled={isSubmitting} type="submit">

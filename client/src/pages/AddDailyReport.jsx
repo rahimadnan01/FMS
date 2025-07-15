@@ -172,6 +172,36 @@ function AddDailyReport() {
                     )}
                   </div>
                 </div>
+                <div className="text-field-update">
+                  <div className="field-with-error">
+                    <TextField
+                      id="outlined-basic"
+                      label=" Egg Weight"
+                      autoComplete="off"
+                      variant="outlined"
+                      {...register("eggWeight", { required: true })}
+                    />
+                    {errors.eggWeight && (
+                      <span className="error-text">
+                        Weight of Bird is required
+                      </span>
+                    )}
+                  </div>
+                </div>
+                <div className="text-field-update">
+                  <div className="field-with-error">
+                    <TextField
+                      id="outlined-basic"
+                      label=" Bird Age"
+                      autoComplete="off"
+                      variant="outlined"
+                      {...register("birdAge", { required: true })}
+                    />
+                    {errors.birdAge && (
+                      <span className="error-text">Bird Age is required</span>
+                    )}
+                  </div>
+                </div>
               </div>
               <div className="update-form-btn">
                 <Button

@@ -62,6 +62,8 @@ function ViewDailyReport() {
       20,
       160
     );
+    doc.text(`Bird Age: ${data.birdAge || 0}`, 20, 170);
+    doc.text(`Egg Weight: ${data.eggWeight || 0}`, 20, 180);
 
     doc.save(`${formatDate(data.Date)}.pdf`);
   };
@@ -159,6 +161,16 @@ function ViewDailyReport() {
               <Chip
                 className="flock-badge"
                 label={`Medicine: ${data.medicine || "Not added"}`}
+                variant="outlined"
+              />
+              <Chip
+                className="flock-badge"
+                label={`Bird Age: ${data.birdAge || 0}`}
+                variant="outlined"
+              />
+              <Chip
+                className="flock-badge"
+                label={`Egg Weight: ${data.eggWeight || 0}`}
                 variant="outlined"
               />
             </div>
