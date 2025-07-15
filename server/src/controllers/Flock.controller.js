@@ -77,7 +77,9 @@ const updateFlock = wrapAsync(async (req, res) => {
   if (!feedStock) {
     throw new ApiError(404, "Feed Stock not found for that flock");
   }
-  if (totalFeedStock) feedStock.totalFeedStock = totalFeedStock;
+  if (totalFeedStock)
+    feedStock.totalFeedStock =
+      feedStock.totalFeedStock + Number(totalFeedStock);
   if (feedConsumed) feedStock.feedConsumed = feedConsumed;
 
   const updatedFeedStock = await feedStock.save();

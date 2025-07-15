@@ -37,6 +37,14 @@ const dailyReportSchema = new mongoose.Schema(
       type: String,
       default: "",
     },
+    eggWeight: {
+      type: Number,
+      default: 0,
+    },
+    birdAge: {
+      type: Number,
+      default: 0,
+    },
   },
   { timestamps: true }
 );
