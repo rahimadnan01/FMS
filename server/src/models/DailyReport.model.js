@@ -38,12 +38,12 @@ const dailyReportSchema = new mongoose.Schema(
       default: "",
     },
     eggWeight: {
-      type: Number,
-      default: 0,
+      type: String,
+      default: "",
     },
     birdAge: {
-      type: Number,
-      default: 0,
+      type: String,
+      default: "",
     },
   },
   { timestamps: true }

@@ -193,7 +193,7 @@ function UpdateDailyReport() {
                     label=" Egg Weight"
                     autoComplete="off"
                     variant="outlined"
-                    defaultValue={data.eggWeight || 0}
+                    defaultValue={data.eggWeight || ""}
                     {...register("eggWeight", { required: true })}
                   />
                   {errors.eggWeight && (
@@ -210,7 +210,7 @@ function UpdateDailyReport() {
                     label=" Bird Age"
                     autoComplete="off"
                     variant="outlined"
-                    defaultValue={data.birdAge || 0}
+                    defaultValue={data.birdAge || ""}
                     {...register("birdAge", { required: true })}
                   />
                   {errors.birdAge && (

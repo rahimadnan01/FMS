@@ -21,7 +21,6 @@ function ViewDailyReport() {
     `https://fms-1-drlz.onrender.com/api/v1/flocks/${id}/dailyReport/${dailyReportId}`
   );
 
-  
   let { data: flockData } = useFetch(
     `https://fms-1-drlz.onrender.com/api/v1/flocks/${id}`
   );
@@ -37,7 +36,7 @@ function ViewDailyReport() {
     doc.text(`Flock Name: ${flockData?.flock?.name}`, 20, 40);
     doc.text(`Breed Name: ${flockData?.flock?.breed}`, 20, 50);
     doc.text(`Total Quantity : ${flockData?.flock?.totalBirds || 0}`, 20, 60);
-    doc.text(`Bird Age: ${data.birdAge || 0}`, 20, 70);
+    doc.text(`Bird Age: ${data.birdAge || ""}`, 20, 70);
     doc.text(
       `Remaining Birds : ${flockData?.flock?.remainingBirds || 0}`,
       20,
@@ -64,7 +63,7 @@ function ViewDailyReport() {
       20,
       180
     );
-    doc.text(`Egg Weight: ${data.eggWeight || 0}`, 20, 190);
+    doc.text(`Egg Weight: ${data.eggWeight || ""}`, 20, 190);
 
     doc.save(`${formatDate(data.Date)}.pdf`);
   };
