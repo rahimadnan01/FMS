@@ -16,6 +16,9 @@ const formatDate = (isoString) => {
 
 function ViewFlockPage() {
   const { id } = useParams();
+  let dailyPercentages;
+  let totalPercentage;
+  let averageProduction;
   const buttons = [
     {
       label: "View Daily Reports",
@@ -34,6 +37,16 @@ function ViewFlockPage() {
     `https://fms-1-drlz.onrender.com/api/v1/flocks/${id}`
   );
 
+  if (data) {
+    dailyPercentages = data?.dailyReports.map(
+      (report) => (report.eggsCollected / data?.flock.remainingBirds) * 100
+    );
+
+    totalPercentage = dailyPercentages.reduce((sum, r) => sum + r, 0);
+
+    averageProduction = Math.ceil(totalPercentage / data?.dailyReports?.length);
+  }
+
   const generatePdf = () => {
     if (!data) return;
     const doc = new jsPDF();
@@ -46,7 +59,7 @@ function ViewFlockPage() {
     doc.text(`Breed: ${data.flock.breed}`, 20, 50);
     doc.text(`Quantity: ${data.flock.totalBirds}`, 20, 60);
     doc.text(`Mortality: ${data.flock.mortality || 0}`, 20, 70);
-    doc.text(`Production %: ${data.flock.percentProduction || 0}`, 20, 80);
+    doc.text(`Production %: ${averageProduction || 0}`, 20, 80);
     doc.text(`Remaining Birds: ${data.flock.remainingBirds || 0}`, 20, 90);
     doc.text(`Total Production: ${data.flock.totalProduction || 0}`, 20, 100);
     doc.text(
@@ -107,7 +120,7 @@ function ViewFlockPage() {
               />
               <Chip
                 className="flock-badge"
-                label={`Production %: ${data.flock.percentProduction || 0}`}
+                label={`Production %: ${averageProduction || 0}`}
                 variant="outlined"
               />
               <Chip
